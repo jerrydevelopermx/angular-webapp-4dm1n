@@ -1,0 +1,15 @@
+<div flex layout="column" class="{{$ctrl.data.class}}">
+  <div ng-if="$ctrl.data.title != null" flex layout="column" layout-md="column" layout-xs="column" class="{{$ctrl.data.title.class}}">
+    <h2>{{$ctrl.data.title.text}}</h2>
+  </div>
+  <div ng-if="$ctrl.data.description != null" flex layout="column" layout-md="column" layout-xs="column" class="{{$ctrl.data.description.class}}">
+    {{$ctrl.data.description.text}}
+  </div>
+  <div flex layout="row" layout-md="column" layout-xs="column" ng-repeat="row in $ctrl.data.rows">
+    <div flex class="{{column.class}}" ng-repeat="column in row.columns">
+      <h4>{{column.title}}</h4>
+      <element-content data="column"></element-content>
+    </div>
+  </div>
+  <element-content data="$ctrl.data.bottom"></element-content>
+</div>

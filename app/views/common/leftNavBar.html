@@ -1,0 +1,71 @@
+<style media="screen">
+  toggle {
+  	margin-bottom: 2px;
+
+  }
+  toggle .toggle-header {
+  	height: 46px;
+  	background-color: #fff;
+
+  }
+  toggle .toggle-header > span {
+    color: #7a7a7a;
+    font-size:11pt !important;
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+
+  toggle .toggle-header.icon.chevron>div{
+
+    border-bottom-width: 2px !important;
+    border-right-width: 2px !important;
+  }
+
+  .icon.chevron>div {
+    border-right-color: #7a7a7a;
+    border-bottom-color: #7a7a7a;
+    border-color: #B4B194;
+    border-bottom-width: 2px;
+    border-right-width:2px;
+  }
+
+</style>
+
+
+<div flex>
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+            class="md-whiteframe-z2 md-sidenav-left">
+  <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
+    <img src="images/logo-negro.png" height="50" />
+  </md-toolbar>
+  <accordion
+      timing="200"
+      close-others="true"
+      toggle-icon="chevron">
+      <toggle ng-repeat="c in $ctrl.content" content="c.value" heading="c.heading"></toggle>
+    </accordion>
+    <md-divider ng-repeat-end></md-divider>
+      <md-button ng-repeat-start="item in $ctrl.menuItems" layout="column" layout-align="space-between start"
+                 flex class="capitalize" ng-click="$ctrl.selectItem(item)"
+                 ui-sref-active="md-warn" ui-sref="{{item.sref}}">
+          <div hide-sm hide-md class="md-tile-content">
+              <i class="material-icons md-30">{{item.icon}}</i>
+              {{item.name}}
+          </div>
+      </md-button>
+
+      <md-divider ng-repeat-end></md-divider>
+      <div class="md-tile-content" flex layout="row" layout-align="center center" style="margin-top:100px">Content Manager v1.0</div>
+      <div class="md-tile-content" flex layout="row" layout-align="center center">
+        <a href="http://toppingcreativo.com.mx" target="_blank"> <img src="images/topping-rosa.png" width="90"/></a>
+      </div>
+
+      <!--
+      <md-button ng-click="vm.showActions($event)" layout-align="center center">
+          <div class="md-tile-content">
+            Actions
+          </div>
+      </md-button>-->
+
+    </md-sidenav>
+</div>

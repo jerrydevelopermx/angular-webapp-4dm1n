@@ -1,0 +1,7 @@
+<md-content md-theme="dark" class="md-padding" layout="column" layout-sm="column">
+  <h1>Contenido {{$ctrl.page}}</h1>
+  {{$ctrl.content}}
+  <app-n-cols ng-repeat="chunk in $ctrl.content" data="chunk"></app-n-cols>
+
+
+</md-content>

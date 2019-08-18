@@ -1,0 +1,56 @@
+<md-content md-theme="dark" class="md-padding" layout="column" layout-sm="column">
+  <div flex layout="row" layout-align="center center"><h3>PRODUCTOS</h3></div>
+  <md-tabs md-center-tabs="true" class="partners-tabs" md-dynamic-height="true" md-border-bottom md-selected="$ctrl.tabSelectedIndex">
+    <md-tab>
+      <md-tab-label>
+        Mujeres
+      </md-tab-label>
+      <md-tab-body>
+        <div flex layout="column">
+          <div flex layout="row">
+            <md-input-container flex="30">
+              <label>Estilo</label>
+              <md-select ng-model="$ctrl.selectedWomanStyle" ng-change="$ctrl.changeWomanStyle();">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="(index,style) in $ctrl.womanStyles" ng-value="style.style_id" ng-selected="index == 0">
+                  {{style.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div flex layout="row" layout-align="end center">
+              <md-button flex="15" class="md-raised md-primary" ng-click="$ctrl.showImage()">Agregar</md-button>
+            </div>
+          </div>
+          <div flex>
+            <app-datatable config="$ctrl.dtConfig" name="woman"></app-datatable>
+          </div>
+        </div>
+      </md-tab-body>
+    </md-tab>
+    <md-tab>
+      <md-tab-label>
+        Hombres
+      </md-tab-label>
+      <md-tab-body>
+        <div flex layout="column">
+          <div flex layout="row">
+            <md-input-container flex="30">
+              <label>Estilo</label>
+              <md-select ng-model="$ctrl.selectedManStyle" ng-change="$ctrl.changeManStyle();">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="(index,style) in $ctrl.manStyles" ng-value="style.style_id" ng-selected="index == 0">
+                  {{style.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <div flex layout="row" layout-align="end center">
+              <md-button flex="15" class="md-raised md-primary" ng-click="$ctrl.showImage()">Agregar</md-button>
+            </div>
+          </div>
+          <div flex>
+            <app-datatable config="$ctrl.dtConfig2" name="man"></app-datatable>
+          </div>
+        </div>
+      </md-tab-body>
+    </md-tab>
+</md-content>

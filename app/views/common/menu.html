@@ -1,0 +1,95 @@
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    color:#fff;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+/*
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
+*/
+</style>
+
+
+<div flex layout="column">
+ <md-content flex layout="row">
+   <md-nav-bar flex md-selected-nav-item="currentNavItem" hide-xs hide-md>
+     <md-nav-item md-nav-href="#!/" name="home">Inicio</md-nav-item>
+     <md-nav-item md-nav-href="#!/nosotros" name="nosotros">Nosotros</md-nav-item>
+     <md-nav-item md-nav-href="#!/productos" name="productos">Productos</md-nav-item>
+     <md-nav-item md-nav-href="#!/servicios" name="servicios">Servicios</md-nav-item>
+     <md-nav-item md-nav-href="#!/soporte" name="soporte">Soporte</md-nav-item>
+     <md-nav-item md-nav-href="#!/contacto" name="contacto">Contacto</md-nav-item>
+   </md-nav-bar>
+   <md-nav-bar flex show-xs hide-lg hide-md>
+     <span flex></span>
+     <md-button ng-click="$ctrl.toggleRight()" ng-hide="$ctrl.isOpenRight()" class="md-primary" style="color: white">
+       Menu
+     </md-button>
+   </md-nav-bar>
+</md-content>
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+  <md-toolbar class="md-theme-light">
+    <h2 class="md-toolbar-tools">Menú</h2>
+  </md-toolbar>
+  <md-content layout-padding>
+    <ul>
+        <li><a href="#!/" ng-click="$ctrl.menuClicked()">Inicio</a></b></li>
+        <li><a href="#!/nosotros" ng-click="$ctrl.menuClicked()">Nosotros</a></li>
+        <li><a href="#!/productos" ng-click="$ctrl.menuClicked()">Productos</a></li>
+        <li><a href="#!/servicios" ng-click="$ctrl.menuClicked()">Servicios</a></li>
+        <li><a href="#!/soporte" ng-click="$ctrl.menuClicked()">Soporte</a></li>
+        <li><a href="#!/contacto" ng-click="$ctrl.menuClicked()">Contacto</a></li>
+    </ul>
+    <!--   <md-button ng-click="close()" class="md-primary">
+      Close Sidenav Right
+    </md-button>-->
+  </md-content>
+</md-sidenav>
+</div>
+
+  <!--
+  <ul>
+      <li><a href="#!/">Inicio</a></b></li>
+      <li><a href="#!/nosotros">Nosotros</a></li>
+      <li><a href="#!/productos">Productos</a></li>
+      <li><a href="#!/servicios">Servicios</a></li>
+      <li><a href="#!/soporte">Soporte</a></li>
+      <li><a href="#!/contacto">Contacto</a></li>
+  </ul>
+
+<md-nav-bar md-selected-nav-item="currentNavItem">
+  <md-nav-item md-nav-click="goto('page1')" name="page1">
+    Page One
+  </md-nav-item>
+  <md-nav-item md-nav-href="#!/nosotros" name="page3">Page Two</md-nav-item>
+  <md-nav-item md-nav-sref="page3" name="page2">Page Three</md-nav-item>
+  <md-nav-item md-nav-sref="app.page4" sref-opts="{reload: true, notify: true}" name="page4">
+    Page Four
+  </md-nav-item>
+</md-nav-bar>
+-->

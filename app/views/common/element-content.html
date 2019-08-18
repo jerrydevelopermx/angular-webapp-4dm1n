@@ -1,0 +1,42 @@
+<div ng-class="{'centered': $ctrl.data.centered }">
+  <img ng-if="$ctrl.data.elementType === 'img'" src="https://ancient-island-69990.herokuapp.com/{{$ctrl.data.src}}" class="{{c.class}}"/>
+  <textarea class="form-control" ng-if="$ctrl.data.elementType === 'text'" name="name" rows="3">{{$ctrl.data.text}}</textarea>
+<!--
+  <li ng-if="c.elementType === 'icon'" class="{{c.class}}"></li>
+  <p ng-if="c.elementType === 'p'" class="{{c.class}}">{{c.text}}</p>
+
+  <ul ng-if="c.elementType === 'ul'" class="{{c.class}}">
+    <li ng-repeat="l in c.list"><a class="{{l.class}}" href="{{l.url}}">{{l.label}}</a></li>
+  </ul>
+  <ul ng-if="c.elementType === 'ul-icons'" class="{{c.class}}">
+    <li ng-repeat="l in c.list"><a href="{{l.url}}"><i class="{{l.class}}">&nbsp;</i>{{l.label}}</a></li>
+  </ul>
+  <md-card ng-if="c.elementType === 'card'"  md-theme="default" md-theme-watch>
+        <md-card-title ng-if="c.title!=null">
+          <md-card-title-text>
+            {{c.title}}
+          </md-card-title-text>
+
+        </md-card-title>
+        <md-card-content >
+          <div ng-if="c.type=='imageContent'">
+            <img src="images/{{c.image}}" alt="" class="{{c.class}}"/>
+          </div>
+          <p ng-if="c.type!='blockquote'">
+            {{c.text}}
+          </p>
+          <blockquote ng-if="c.type=='blockquote'">
+            <p>
+              {{c.text}}
+            </p>
+          </blockquote>
+          <div ng-if="c.type=='blockquote'">
+							<div >
+								<img src="images/{{c.author.image}}" alt="" class="author"/>
+							</div>
+							<p class="credit">- <strong>{{c.author.name}}</strong> <span>{{c.author.position}}</span></p>
+					</div>
+
+  </md-card>
+  <div id="{{c.id}}" class="{{c.id}}" ng-if="c.elementType === 'component'"></div>-->
+</div>

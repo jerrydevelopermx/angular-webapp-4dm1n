@@ -1,0 +1,14 @@
+{
+  "name": "app-web",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.7.2",
+    "angular-ui-router": "^1.0.20",
+    "angular-material": "^1.1.10",
+    "angular-simple-logger": "^0.1.7"
+  },
+  "resolutions": {
+    "angular": "1.7.2"
+  },
+  "appPath": "app"
+}

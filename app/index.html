@@ -1,0 +1,91 @@
+<!doctype html>
+<html ng-app="webApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-aria/angular-aria.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-material/angular-material.js"></script>
+        <script src="bower_components/ng-accordion/ng-accordion/dist/ng-accordion.min.js"></script>
+        <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+        <link rel="stylesheet" href="bower_components/ng-accordion/ng-accordion/dist/ng-accordion.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/custom.css">
+        <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet">
+
+
+        <script src="scripts/app.js"></script>
+        <script src="scripts/app.routes.js"></script>
+        <script src="scripts/services/requester.js"></script>
+
+        <script src="scripts/components/common/leftNavBar.js"></script>
+        <script src="scripts/components/common/login.js"></script>
+
+
+        <script src="scripts/components/common/header.js"></script>
+        <script src="scripts/components/common/menu.js"></script>
+        <script src="scripts/components/common/content-n-cols.js"></script>
+        <script src="scripts/components/common/element-content.js"></script>
+        <script src="scripts/components/common/appDatatable.js"></script>
+
+
+        <script src="scripts/components/common/gallery.js"></script>
+
+
+        <script src="scripts/components/main.js"></script>
+        <script src="scripts/components/sizesGuide.js"></script>
+        <script src="scripts/components/galleries.js"></script>
+        <script src="scripts/components/images.js"></script>
+        <script src="scripts/components/products.js"></script>
+        <script src="scripts/components/styles.js"></script>
+        <script src="scripts/components/pagesContent.js"></script>
+
+
+
+    </head>
+    <body ng-cloak layout="row">
+
+        <!--<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+          <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
+            <md-button layout="row" layout-align="center center" class="md-toolbar-tools md-warn"
+                       href="https://github.com/flatlogic/angular-material-dashboard">
+              <h1>CONTENT ADMIN</h1>
+            </md-button>
+          </md-toolbar>
+              <md-button ng-repeat-start="item in vm.menuItems" layout="column" layout-align="center center"
+                         flex class="capitalize" ng-click="vm.selectItem(item)"
+                         ui-sref-active="md-warn" ui-sref="{{item.sref}}">
+                  <div hide-sm hide-md class="md-tile-content">
+                      <i class="material-icons md-36">{{item.icon}}</i>
+                  </div>
+                  <div class="md-tile-content">
+                      {{item.name}}
+                  </div>
+              </md-button>
+              <md-divider ng-repeat-end></md-divider>
+              <md-button ng-click="vm.showActions($event)" layout-align="center center">
+                  <div class="md-tile-content">
+                    Actions
+                  </div>
+              </md-button>
+        </md-sidenav>-->
+        <left-nav-bar></left-nav-bar>
+        <div layout="column" flex>
+            <app-header></app-header>
+            <md-content flex class="md-padding page-content">
+                <div ui-view></div>
+            </md-content>
+        </div>
+    </body>
+</html>
