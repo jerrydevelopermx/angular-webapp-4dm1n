@@ -5,7 +5,9 @@
     "angular": "1.7.2",
     "angular-ui-router": "^1.0.20",
     "angular-material": "^1.1.10",
-    "angular-simple-logger": "^0.1.7"
+    "angular-simple-logger": "^0.1.7",
+    "angular-datatables": "0.6.2"
+
   },
   "resolutions": {
     "angular": "1.7.2"
