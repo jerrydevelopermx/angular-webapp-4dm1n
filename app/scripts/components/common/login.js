@@ -13,7 +13,7 @@
 
       function componentController($scope, $state, Auth){
         var vm = this;
-
+        vm.error = "";
         vm.$onInit = function(){}
 
 
@@ -27,7 +27,8 @@
               $scope.$emit("userLogged", { status: true });
               $state.go('home');
             }
-
+          }, function(error){
+            vm.error = error;
           });
 
         }

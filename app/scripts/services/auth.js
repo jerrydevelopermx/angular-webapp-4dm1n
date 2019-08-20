@@ -18,7 +18,7 @@ angular.module('webApp')
       defer.resolve(true);
     },
     function(error){
-      console.log(error)
+      defer.reject(error)
     });
 
     return defer.promise;
