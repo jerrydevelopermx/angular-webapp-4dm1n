@@ -5,8 +5,9 @@ angular
 /**
  * @function routes
  */
-function routes ($stateProvider) {
+function routes ($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.otherwise('/');
     $stateProvider
 
                 .state('home', {
@@ -41,7 +42,7 @@ function routes ($stateProvider) {
                     component: 'styles',
                     publicPage: true
                 })
-                
+
                 .state('products', {
                     url: '/productos',
                     component: 'products',
