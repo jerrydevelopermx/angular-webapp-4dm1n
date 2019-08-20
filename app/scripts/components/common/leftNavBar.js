@@ -11,11 +11,14 @@
       })
 
 
-      function componentController($scope, $mdToast){
+      function componentController($rootScope, $scope, $mdToast, localStorageService){
         var vm = this;
-
+        vm.loggedUser = false;
 
         vm.$onInit = function(){
+
+          console.log(vm.loggedUser)
+
           var pagesList = `<ul>
                               <li><a class="pages-links" href="#!/contenido-paginas/home"><i class="material-icons md-30">home</i><span>Home</span></a></li>
                               <li><a class="pages-links" href="#!/contenido-paginas/nosotros"><i class="material-icons md-30">supervisor_account</i><span>Nosotros</span></a></li>
@@ -55,6 +58,11 @@
             },
           ];
         };
+
+        $rootScope.$on('userLogged', function(event, params){
+          vm.loggedUser = params.status;
+        });
+
 
         vm.selectItem = function(item){
           showSimpleToast(item);

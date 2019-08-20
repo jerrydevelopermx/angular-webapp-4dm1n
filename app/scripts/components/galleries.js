@@ -7,10 +7,14 @@
           data: '=',
         },
         templateUrl: 'views/galleries.html',
-        controller: function(){
+        controller: function($scope, Auth){
           var vm = this;
 
           vm.$onInit = function(){
+
+            if(Auth.validate()) {
+              $scope.$emit("userLogged", { status: true });
+            }
 
             vm.dtConfig = {
               api: 'catalog/galleries',

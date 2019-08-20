@@ -10,27 +10,51 @@
         controller: componentController
       })
 
-      function componentController($scope){
+      function componentController($scope, $mdToast, Auth){
         var vm = this;
-        console.log("MAIN Component controller here!");
 
         vm.$onInit = function(){
-          $scope.$emit('init MAIN component()');
-          console.log('init MAIN component()');
+
+          if(Auth.validate()) {
+            $scope.$emit("userLogged", { status: true });
+          }
+
+          vm.menuItems = [
+            {
+              name: 'Dashboard',
+              icon: 'dashboard',
+              sref: 'nosotros'
+            },
+            {
+              name: 'Profile',
+              icon: 'person',
+              sref: 'productos'
+            },
+            {
+              name: 'Table',
+              icon: 'view_module',
+              sref: 'servicios'
+            },
+            {
+              name: 'Data Table',
+              icon: 'view_module',
+              sref: 'contacto'
+            }
+          ];
         };
 
-        vm.$postLink = function(){
-          console.log('MAIN Post link() DOM ready!')
-        };
-
-        vm.$onChanges = function($event){
-          console.log($event);
-        };
-
-        vm.$onDestroy = function(){
-          console.log('MAIN component destroy!! :( ')
-        };
+        vm.selectItem = function(item){
+          showSimpleToast(item);
+        }
+        function showSimpleToast(title) {
+          $mdToast.show(
+            $mdToast.simple()
+              .content(title)
+              .hideDelay(2000)
+              .position('bottom right')
+          );
+        }
 
       }
-      
+
 })();

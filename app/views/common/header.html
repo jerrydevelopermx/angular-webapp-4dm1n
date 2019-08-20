@@ -1,4 +1,4 @@
-<md-toolbar layout="row" layout-align="center center">
+<md-toolbar layout="row" layout-align="center center" ng-if="$ctrl.loggedUser">
     <section layout-align="start center" layout-fill flex>
         <!--<md-button hide-gt-sm ng-click="$ctrl.toggleItemsList()" aria-label="Menu">
             <i class="material-icons">menu</i>
@@ -15,5 +15,9 @@
         <md-button class="toolbar-button" aria-label="Settings" ng-click="$ctrl.toggleItemsList()">
             <i class="material-icons">menu</i>
         </md-button>
+        <md-button class="toolbar-button" aria-label="Settings" ng-click="$ctrl.logout()">
+            <i class="material-icons">power_settings_new</i>
+        </md-button>
+
     </section>
 </md-toolbar>

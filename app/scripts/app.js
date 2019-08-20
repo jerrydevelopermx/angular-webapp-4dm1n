@@ -15,14 +15,21 @@ angular
       'ngMessages',
       'nemLogging',
       'ngAccordion',
-      'datatables'
-
+      'datatables',
+      'LocalStorageModule'
   ])
 
   .constant('APP',{
-    'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',
+    'api_url' : 'http://localhost/web-content-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
     'images_repo' : 'https://ancient-island-69990.herokuapp.com/'
   })
+
+  .config(function (localStorageServiceProvider) {
+      localStorageServiceProvider
+        .setPrefix('webApp')
+        .setStorageType('sessionStorage')
+        .setNotify(true, true)
+    });
   /*
   .config(['$httpProvider', ($httpProvider) => {
     //initialize get if not there

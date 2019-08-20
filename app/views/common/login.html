@@ -11,11 +11,11 @@
       <form>
         <div layout="column" class="login-form">
           <label>Email</label>
-          <input type="email" placeholder="algun@email.com" class="form-control">
+          <input type="text" placeholder="algun@email.com" class="form-control" ng-model="$ctrl.username">
           <label>Password</label>
-          <input type="password" placeholder="Password" class="form-control">
+          <input type="password" placeholder="Password" class="form-control" ng-model="$ctrl.password">
           <div layout="row" layout-align="center center">
-            <md-button flex="33" class="md-raised md-primary">Enviar</md-button>
+            <md-button flex="33" class="md-raised md-primary" ng-click="$ctrl.login()">Enviar</md-button>
           </div>
         </div>
         </form>

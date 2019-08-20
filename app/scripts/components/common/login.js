@@ -11,48 +11,26 @@
       })
 
 
-      function componentController($scope, $mdToast){
+      function componentController($scope, $state, Auth){
         var vm = this;
 
+        vm.$onInit = function(){}
 
-        vm.$onInit = function(){
 
-          vm.menuItems = [
-            {
-              name: 'Dashboard',
-              icon: 'dashboard',
-              sref: 'nosotros'
-            },
-            {
-              name: 'Profile',
-              icon: 'person',
-              sref: 'productos'
-            },
-            {
-              name: 'Table',
-              icon: 'view_module',
-              sref: 'servicios'
-            },
-            {
-              name: 'Data Table',
-              icon: 'view_module',
-              sref: 'contacto'
+        vm.login = function(){
+          var credentials = {
+            username : vm.username,
+            password : vm.password
+          }
+          Auth.login(credentials).then(function(success){
+            if(success){
+              $scope.$emit("userLogged", { status: true });
+              $state.go('home');
             }
-          ];
-        };
 
-        vm.selectItem = function(item){
-          showSimpleToast(item);
-        }
-        function showSimpleToast(title) {
-          $mdToast.show(
-            $mdToast.simple()
-              .content(title)
-              .hideDelay(2000)
-              .position('bottom right')
-          );
-        }
+          });
 
+        }
 
       }
 })();

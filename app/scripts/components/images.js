@@ -7,10 +7,13 @@
           data: '='
         },
         templateUrl: 'views/images.html',
-        controller: function($mdDialog, $scope){
+        controller: function($mdDialog, $scope, Auth){
           var vm = this;
 
           vm.$onInit = function(){
+            if(Auth.validate()) {
+              $scope.$emit("userLogged", { status: true });
+            }
 
             vm.dtConfig = {
               api: 'catalog/images',

@@ -32,12 +32,13 @@
 </style>
 
 
-<div flex>
+<div flex ng-if="$ctrl.loggedUser">
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
             class="md-whiteframe-z2 md-sidenav-left">
   <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
     <img src="images/logo-negro.png" height="50" />
   </md-toolbar>
+  {{$ctrl.loggedUser}}
   <accordion
       timing="200"
       close-others="true"

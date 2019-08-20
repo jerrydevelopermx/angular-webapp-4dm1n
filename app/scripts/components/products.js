@@ -7,7 +7,7 @@
           data: '=',
         },
         templateUrl: 'views/products.html',
-        controller: function(APP, Requester, $scope){
+        controller: function(APP, Requester, $scope, Auth){
           var vm = this;
           vm.womanStyles = [];
           vm.manStyles = [];
@@ -40,6 +40,9 @@
           };
 
           vm.$onInit = function(){
+            if(Auth.validate()) {
+              $scope.$emit("userLogged", { status: true });
+            }
             getStyles();
             initializeDatatables();
 
