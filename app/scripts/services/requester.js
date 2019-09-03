@@ -4,8 +4,8 @@ angular.module('webApp')
 
   return {
     get: getRequest,
-    post: postRequest
-
+    post: postRequest,
+    put: putRequest
   }
 
   function getRequest(api){
@@ -17,8 +17,9 @@ angular.module('webApp')
   }
 
   function postRequest(api, params){
-    var defer = $q.defer(); console.log(APP.api_url + api)
-    $http.post(APP.api_url + api, params).then(function(result) {
+    var defer = $q.defer();
+    console.log(APP.api_url + api)
+    $http.post(APP.api_url + api, JSON.stringify(params), {headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(function(result) {
         defer.resolve(result.data);
     }, function(error){
       defer.reject(error)
@@ -26,4 +27,15 @@ angular.module('webApp')
     return defer.promise;
   }
 
+  function putRequest(api, params){
+    var defer = $q.defer();
+    console.log(APP.api_url + api);
+    console.log(params)
+    $http.put(APP.api_url + api, JSON.stringify(params), {headers: {'Content-Type': 'application/json; charset=UTF-8'}}).then(function(result) {
+        defer.resolve(result.data);
+    }, function(error){
+      defer.reject(error)
+    });
+    return defer.promise;
+  }
 });

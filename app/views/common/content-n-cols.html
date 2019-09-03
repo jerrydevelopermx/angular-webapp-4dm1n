@@ -1,37 +1,47 @@
 <div flex layout="column"  id="{{$ctrl.data.id}}">
-  <h2>Bloque {{$ctrl.data.order}}</h2>
-  <div flex layout="row" layout-align="start center">
-    <label flex="10">CSS Bloque</label>
-    <input flex="33" class="form-control" type="text" ng-model="$ctrl.data.class"/>
-  </div>
-  <div ng-if="$ctrl.data.title != null" flex layout="row" layout-md="column" layout-xs="column" class="{{$ctrl.data.title.class}}">
-    <div flex="66" layout="row" layout-align="start center">
-      <label flex="15">Título</label>
-      <textarea flex="66" class="" rows="3" ng-model="$ctrl.data.title.text"></textarea>
-    </div>
-    <div flex layout="row" layout-align="start center">
-      <label flex="15">CSS</label>
-      <input class="form-control" type="text" ng-model="$ctrl.data.title.class"/>
-    </div>
-  </div>
-  <div ng-if="$ctrl.data.description != null" flex layout="row" layout-md="column" layout-xs="column" >
-    <div flex="66" layout="row" layout-align="start center">
-      <label flex="15">Descripción</label>
-      <textarea flex="66" name="name" rows="4" ng-model="$ctrl.data.description.text"></textarea>
-    </div>
-    <div flex layout="row" layout-align="start center">
-      <label flex="15">CSS</label>
-      <input class="form-control" type="text" ng-model="$ctrl.data.description.class"/>
-    </div>
-  </div>
-  <h3>Columnas</h3>
-  <div flex layout="row" layout-md="column" layout-xs="column">
-    <div layout="column" layout-align="center center" flex class="{{column.class}}" ng-repeat="column in $ctrl.data.columns">
-      <h4 class="{{column.titleClass}}">{{column.type}}</h4>
+  <hr/>
+  <h3>Bloque {{$ctrl.data.order}}</h3>
 
+  <div flex layout="row" layout-align="start center" class="form-row">
+    <label flex="10" flex-xs="25">CSS Bloque</label>
+    <input flex="33" flex-xs="70" class="form-control" type="text" ng-model="$ctrl.data.class"/>
+  </div>
+
+  <div ng-if="$ctrl.data.title != null" flex layout="row" layout-md="column" layout-xs="column" class="{{$ctrl.data.title.class}} form-row">
+    <div flex layout="row" layout-align="start center">
+      <label flex="20" flex-xs="25">Título</label>
+      <textarea flex="66" flex-xs="70" rows="4" ng-model="$ctrl.data.title.text"></textarea>
+    </div>
+    <div flex layout="row" layout-align="start center">
+      <label flex="20" flex-xs="25">CSS</label>
+      <input flex="66" flex-xs="70" class="form-control" type="text" ng-model="$ctrl.data.title.class"/>
+    </div>
+  </div>
+
+  <div ng-if="$ctrl.data.description != null" flex layout="row" layout-md="column" layout-xs="column" class="form-row">
+    <div flex layout="row" layout-align="start center">
+      <label flex="20" flex-xs="25">Descripción</label>
+      <textarea flex="66" flex-xs="70" name="name" rows="4" ng-model="$ctrl.data.description.text"></textarea>
+    </div>
+    <div flex layout="row" layout-align="start center">
+      <label flex="20" flex-xs="25">CSS</label>
+      <input flex="66" flex-xs="70" class="form-control" type="text" ng-model="$ctrl.data.description.class"/>
+    </div>
+  </div>
+  <div layout="row" layout-xs="column" class="form-row" layout-align="center center">
+    <md-button class="md-raised save-button" ng-click="$ctrl.saveGral()">
+      Guardar
+    </md-button>
+  </div>
+  <h3 ng-if="$ctrl.data.columns[0].element_id != null">Columnas</h3>
+  <div flex layout="row" layout-md="column" layout-xs="column">
+    <div flex layout="column" ng-repeat="column in $ctrl.data.columns">
+      <div layout="row" ng-if="column.title != null && column.title != ''">
+        <h5 flex="20">Título</h5>
+        <div flex layout="column" layout-align="center start" ng-bind-html="column.title" flex></div>
+      </div>
       <element-content data="column"></element-content>
     </div>
   </div>
   <element-content data="$ctrl.data.bottom"></element-content>
-  <md-divider ng-repeat-end></md-divider>
 </div>

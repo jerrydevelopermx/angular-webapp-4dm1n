@@ -37,9 +37,22 @@ function routes ($stateProvider, $urlRouterProvider) {
                     component: 'galleries',
                     publicPage: true
                 })
+
+                .state('galleryDetail', {
+                    url: '/galerias/detalle/{id}',
+                    component: 'galleryDetail',
+                    publicPage: true
+                })
+
                 .state('styles', {
                     url: '/estilos',
                     component: 'styles',
+                    publicPage: true
+                })
+
+                .state('styleDetail', {
+                    url: '/estilos/detalle/{id}',
+                    component: 'styleDetail',
                     publicPage: true
                 })
 

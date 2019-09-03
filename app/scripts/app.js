@@ -16,20 +16,28 @@ angular
       'nemLogging',
       'ngAccordion',
       'datatables',
-      'LocalStorageModule'
+      'datatables.fixedcolumns',
+      'LocalStorageModule',
+      'ngSanitize'
   ])
 
   .constant('APP',{
-    'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
-    'images_repo' : 'https://ancient-island-69990.herokuapp.com/'
+    'api_url' : 'http://localhost/web-content-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
+    'images_repo' : 'http://localhost:1339/'
   })
 
-  .config(function (localStorageServiceProvider) {
+  .config(function (localStorageServiceProvider, $mdThemingProvider) {
       localStorageServiceProvider
         .setPrefix('webApp')
         .setStorageType('sessionStorage')
-        .setNotify(true, true)
+        .setNotify(true, true);
+
+      $mdThemingProvider.theme("success-toast");
+      $mdThemingProvider.theme("error-toast");
+
     });
+
+
   /*
   .config(['$httpProvider', ($httpProvider) => {
     //initialize get if not there

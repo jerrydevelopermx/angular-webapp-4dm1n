@@ -7,7 +7,7 @@
           data: '=',
         },
         templateUrl: 'views/pagesContent.html',
-        controller: function($stateParams, Requester, $scope, Auth){
+        controller: function($rootScope, $stateParams, Requester, $scope, Auth, $timeout){
 
           var vm = this;
           vm.page = '';
@@ -16,22 +16,35 @@
             if(Auth.validate()) {
               $scope.$emit("userLogged", { status: true });
             }
-            console.log($stateParams)
             vm.page = $stateParams.page;
-
+            $timeout(function(){
+              $('.pages-links').removeClass('active-link');
+              $('#'+vm.page+'-link').addClass('active-link');
+            },0)
 
             getData();
-
-
           };
 
+          vm.$onDestroy = function(){
+            updateLinks();
+          }
+
+          function updateLinks(){
+            $('.pages-links').removeClass('active-link');
+            //$('#'+vm.page+'-link').addClass('active-link');
+          }
           function getData(){
-            Requester.get('content/chunks/' + vm.page, {}).then(function(data){
+            Requester.get('content/chunks_page/' + vm.page, {}).then(function(data){
               vm.content = data;
             }, function(){
 
             });
           }
+
+          $rootScope.$on('contentUpdated', function(event, params){
+            getData();
+          });
+
         }
       })
 })();

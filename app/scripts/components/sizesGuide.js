@@ -15,7 +15,7 @@
               $scope.$emit("userLogged", { status: true });
             }
             vm.dtConfig = {
-              api: 'catalog/sizes',
+              api: 'catalog/sizes_product',
               columns : [
                 { key: 'product_id', title: 'Producto'},
                 { key: 'size', title: 'Talla'},

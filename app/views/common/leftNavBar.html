@@ -36,14 +36,18 @@
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
             class="md-whiteframe-z2 md-sidenav-left">
   <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
-    <img src="images/logo-negro.png" height="50" />
+    <img src="images/logo-negro.png" height="60" />
   </md-toolbar>
-  {{$ctrl.loggedUser}}
   <accordion
       timing="200"
       close-others="true"
-      toggle-icon="chevron">
-      <toggle ng-repeat="c in $ctrl.content" content="c.value" heading="c.heading"></toggle>
+      toggle-icon="">
+      <toggle
+        ng-repeat="c in $ctrl.content"
+        content="c.value"
+        heading="c.heading"
+        handle="myaccordion">
+      </toggle>
     </accordion>
     <md-divider ng-repeat-end></md-divider>
       <md-button ng-repeat-start="item in $ctrl.menuItems" layout="column" layout-align="space-between start"

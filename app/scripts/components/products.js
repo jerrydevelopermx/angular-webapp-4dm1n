@@ -15,7 +15,7 @@
           vm.selectedManStyle  = 'SK-MN';
 
           vm.dtConfig = {
-            api: 'catalog/products/' + vm.selectedWomanStyle,
+            api: 'catalog/products_style/' + vm.selectedWomanStyle,
             columns : [
               { key: 'code', title: 'Producto'},
               { key: 'description', title: 'Descripción'},
@@ -27,7 +27,7 @@
           };
 
           vm.dtConfig2 = {
-            api: 'catalog/products/' + vm.selectedManStyle,
+            api: 'catalog/products_style/' + vm.selectedManStyle,
             columns : [
               { key: 'code', title: 'Producto'},
               { key: 'description', title: 'Descripción'},

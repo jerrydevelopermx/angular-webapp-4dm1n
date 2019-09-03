@@ -23,7 +23,9 @@
                 { key: 'description', title: 'Descripción'},
                 { key: 'gallery_type', title: 'Tipo'},
                 { key: 'page_id', title: 'Página'},
-                { key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'gallery\', \'' + data.gallery_id + '\')"><i class="material-icons md-30">create</i></a>' } },
+                { key: null, title: '', custom: function(data) { return '<a href="#!/galerias/detalle/'+ data.gallery_id+' "><i class="material-icons md-30">create</i></a>' } },
+
+                //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'gallery\', \''  #!/galerias'\')"><i class="material-icons md-30">create</i></a>' } },
               ]
             };
           }

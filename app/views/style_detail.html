@@ -1,58 +1,36 @@
-<md-dialog aria-label="Mango (Fruit)">
-  <form ng-cloak>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h3>Detalle Estilo</h3>
-        <span flex></span>
-      </div>
-    </md-toolbar>
+<div layout="column">
+      <h3>Detalle estilo</h3>
 
-    <md-dialog-content>
-      <div class="md-dialog-content" layout="column" >
-        <h5>Información</h5>
-        <div layout="row">
-          <span flex>Nombre: {{data[0].name}}</span>
-          <span flex>Descripción: {{data[0].description}}</span>
+      <div class="" layout="column" >
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Nombre: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.style.name"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Género: </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <input flex="90" class="form-control" type="text" value="{{$ctrl.style.gender}}" readonly="readonly"/>
+          </div>
         </div>
-        <div layout="row">
-          <span flex>Página: {{data[0].parent_id}}</span>
-          <span flex>Tipo: {{data[0].gallery_type}}</span>
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
+          <div flex layout="row" >
+            <textarea rows="4" flex="95" ng-model="$ctrl.style.description"></textarea>
+          </div>
         </div>
-        <div layout="column">
-          <h5>Imágenes</h5>
-          <table>
-            <thead>
-              <th>Archivo</th>
-              <th>Orden</th>
-            </thead>
-            <tbody>
-              <tr ng-repeat="img in data">
-                <td>{{img.src}}</td>
-                <td>
-                  <!--
-                  <i class="material-icons md-30">vertical_align_top</i>
-                  <i class="material-icons md-30">vertical_align_bottom</i>
-                  <i class="material-icons md-30">keyboard_arrow_up</i>
-                  <i class="material-icons md-30">keyboard_arrow_down</i>-->
-                  <i class="material-icons md-30" style="color: green">arrow_upward</i>
-                  <i class="material-icons md-30" style="color: red">arrow_downward</i>
 
+        <div layout="row" layout-align="center center">
+          <md-button class="md-raised save-button" ng-click="$ctrl.update()">
+            Guardar
+          </md-button>
+        </div>
 
-                </td>
-
-              </tr>
-            </tbody>
-          </table>
+        <div layout="row" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Imagen: </div>
+          <img ng-src="{{$ctrl.images_url + $ctrl.style.src}}" width="200"/>
 
         </div>
       </div>
-    </md-dialog-content>
-
-    <md-dialog-actions layout="row" layout-align="end center">
-
-      <md-button class="md-raised md-primary" ng-click="hide()">
-       Cerrar
-      </md-button>
-    </md-dialog-actions>
-  </form>
-</md-dialog>
+</div>

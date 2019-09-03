@@ -71,6 +71,9 @@ md-nav-bar .md-button._md-nav-button.md-unselected {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.form-row {
+  margin:10px 0;
+}
 
 .mdl-data-table td {
   text-align: center !important;
@@ -78,6 +81,43 @@ md-nav-bar .md-button._md-nav-button.md-unselected {
 
 .mdl-data-table th {
   text-align: center !important;
+}
+
+md-toast.md-error-toast-theme div.md-toast-content{
+    color: white !important;
+    background-color: red !important;
+}
+
+md-toast.md-success-toast-theme div.md-toast-content{
+    color: white !important;
+    background-color: green !important;
+}
+
+/* md-button */
+.md-button.save-button {
+  background-color: green;
+  color: white;
+}
+.md-button.cancel-button {
+  background-color: #cc0000;
+  color: white;
+}
+.md-button.edit-button {
+  background-color: #cc6600;
+  color: white;
+}
+.md-button.edit-button:not([disabled]):hover {
+  background-color: #e67300;
+  color: white;
+}
+
+.md-button.save-button:not([disabled]):hover {
+  background-color: #248f24;
+  color: white;
+}
+.md-button.cancel-button:not([disabled]):hover {
+  background-color: #e60000;
+  color: white;
 }
 
 
@@ -94,6 +134,9 @@ a.pages-links span {
   padding: 10px;
 }
 
+a.active-link {
+  color: rgb(255,87,34)
+}
 /* Wrapper */
 
 	.wrapper {

@@ -41,24 +41,38 @@
 
           $rootScope.$on('changeWomanStyle', updateWomanDT);
           $rootScope.$on('changeManStyle', updateManDT);
+          $rootScope.$on("dtContentUpdated", updateStylesDT);
 
-          function updateWomanDT(event, args){ console.log(args)
+          function updateWomanDT(event, args){
             if(vm.dtInstances[args.name] && typeof(vm.dtInstances[args.name].changeData) === 'function'){
-              vm.dtInstances[args.name].changeData(Requester.get('catalog/products/' + args.style));
+              vm.dtInstances[args.name].changeData(Requester.get('catalog/products_style/' + args.style));
             }
           }
 
           function updateManDT(event, args){
             if(vm.dtInstances[args.name] && typeof(vm.dtInstances[args.name].changeData) === 'function'){
-              vm.dtInstances[args.name].changeData(Requester.get('catalog/products/' + args.style));
+              vm.dtInstances[args.name].changeData(Requester.get('catalog/products_style/' + args.style));
             }
           }
+          /*
+          UPDATE styles datatable
+          */
+          function updateStylesDT(){ console.log('rerender')
+          console.log(vm.dtInstances['styles'])
+            vm.dtInstances['styles']._renderer.rerender();
+          }
+
 
           vm.$onInit = function(){
             vm.dtInstances[vm.name] = {};
             vm.dtOptions = DTOptionsBuilder.fromFnPromise(Requester.get(vm.config.api))
               .withPaginationType('full_numbers')
               .withLanguage(language)
+              /*.withOption('scrollX', true)
+              .withOption('scrollCollapse', true)
+              .withFixedColumns({
+                  leftColumns: 2
+              })*/
               .withOption('createdRow', function(row) {
                 $compile(angular.element(row).contents())($scope);
               });
@@ -75,16 +89,18 @@
           vm.showModal = function(type, element_id) {
             var types = {
               image: { template: 'views/common/imageViewer.html', callUrl: 'catalog/images/', controller: ImgDialogCtrl },
-              gallery: { template: 'views/gallery_detail.html', callUrl: 'catalog/galleries/', controller: DialogController },
+            //  gallery: { template: 'views/gallery_detail.html', callUrl: 'catalog/galleries/', controller: GalleryDialogCtrl },
+              style: { template: 'views/style_detail.html', callUrl: 'catalog/styles/', controller: StyleDialogCtrl },
+              product: { template: 'views/product_detail.html', callUrl: 'catalog/products/', controller: DialogController },
+
               sizes: { template: 'views/sizes_detail.html', callUrl: 'catalog/sizes/', controller: DialogController },
-              style: { template: 'views/style_detail.html', callUrl: 'catalog/sizes/', controller: DialogController },
-              product: { template: 'views/product_detail.html', callUrl: 'catalog/sizes/', controller: DialogController }
 
 
             };
             $mdDialog.show({
               locals:{ url: types[type].callUrl + element_id },
               controller: types[type].controller,
+              controllerAs: '$ctrl',
               templateUrl: types[type].template,
               parent: angular.element(document.body),
               clickOutsideToClose:true
@@ -115,7 +131,7 @@
           function DialogController($scope, $mdDialog, url, APP) {
 
             function init(){
-
+              $scope.images_url = APP.images_repo;
               Requester.get(url).then(function(data) { console.log(data)
                 $scope.data = data;
                 //$scope.src = APP.images_repo + ((result.data[0].src) ? result.data[0].src : '');
@@ -135,9 +151,80 @@
             $scope.answer = function(answer) {
               $mdDialog.hide(answer);
             };
+
+            $scope.updateStyle = function () {
+
+
+            }
+
           }
 
+          function StyleDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
+            let $ctrl = this;
+            $ctrl.style = {};
+            function init(){
+              $ctrl.images_url = APP.images_repo;
+              Requester.get(url).then(function(data) { console.log(data)
+                $ctrl.id = data[0].style_id;
+                $ctrl.style.gender = data[0].gender;
+                $ctrl.style.name = data[0].name;
+                $ctrl.style.src = data[0].src;
+                $ctrl.style.description = data[0].description;
+              })
+            }
+            init();
 
+            $ctrl.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $ctrl.update = function () {
+              Requester.put('content/styles/' + $ctrl.id, $ctrl.style).then(function(data) {
+                if(data.status == 200){
+                  Notifications.message('success', 'Contenido actualizado correctamente');
+                  $mdDialog.hide();
+                  //$scope.$emit("dtContentUpdated", {});
+                }
+              },
+              function(error){
+                Notifications.message('error', error);
+              });
+            }
+          };
+
+          /*function GalleryDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
+            let $ctrl = this;
+            $ctrl.gallery = {};
+            function init(){
+              $ctrl.images_url = APP.images_repo;
+              Requester.get(url).then(function(data) {
+                $ctrl.id = data[0].gallery_id;
+                $ctrl.gallery.name = data[0].name;
+                $ctrl.gallery.description = data[0].description;
+                $ctrl.type = data[0].gallery_type;
+                $ctrl.page = data[0].parent_id;
+                $ctrl.data = data;
+              })
+            }
+            init();
+
+            $ctrl.selectImage = function () { console.log("aj")
+              $mdDialog.show({
+                locals:{ url: 'catalog/images/' },
+                controller: ImgDialogCtrl,
+                controllerAs: '$ctrl',
+                templateUrl: 'views/common/imageViewer.html',
+              //  parent: angular.element(document.body),
+                //clickOutsideToClose:true
+              });
+            }
+
+            $ctrl.hide = function() {
+              $mdDialog.hide();
+            };
+
+
+          };*/
         }
       })
 })();

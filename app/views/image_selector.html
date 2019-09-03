@@ -1,0 +1,41 @@
+<md-dialog aria-label="Styles detail" flex="70">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>Seleccionar imagen</h3>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column" >
+        <table class="dataTable mdl-data-table">
+          <thead>
+            <th>Archivo</th>
+            <th>Descripción</th>
+            <th>Vista previa</th>
+            <th>Seleccionar</th>
+          </thead>
+          <tbody>
+            <tr ng-repeat="img in $ctrl.data">
+              <td>{{img.src}}</td>
+              <td>{{img.description}}</td>
+              <td><img ng-src="{{$ctrl.images_repo + img.src}}" width="200"/></td>
+              <td><input type="radio" ng-value="img.image_id" ng-model="$ctrl.selectedImage"/></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="end center">
+      <md-button class="md-raised save-button" ng-disabled="$ctrl.selectedImage == ''" ng-click="$ctrl.changeImage()">
+       Cambiar
+      </md-button>
+      <md-button class="md-raised cancel-button" ng-click="$ctrl.hide()">
+       Cerrar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

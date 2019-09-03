@@ -1,0 +1,38 @@
+<md-dialog aria-label="Styles detail" flex="70">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>Editor de contenido</h3>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column" >
+        <div flex layout="row" layout-align="start center">
+          <label flex="10" flex-xs="25">Título</label>
+          <input flex="60" type="text" class="form-control" ng-model="$ctrl.title" />
+          <md-button flex="10" class="md-raised save-button" ng-click="$ctrl.saveTitle()">
+            Guardar
+          </md-button>
+        </div>
+        <div flex layout="row" layout-align="start center">
+          <label flex="10" flex-xs="25">Contenido</label>
+        </div>
+        <textarea flex ng-model="$ctrl.content" rows="10" cols="10"></textarea>
+        <div layout="row" layout-align="center center">
+          <md-button class="md-raised save-button" ng-click="$ctrl.saveContent()">
+            Guardar
+          </md-button>
+        </div>
+      </div>
+      <div layout="row" layout-align="end center">
+        <md-button class="md-raised cancel-button" ng-click="$ctrl.hide()">
+         Cerrar
+        </md-button>
+      </div>
+    </md-dialog-content>
+
+
+  </form>
+</md-dialog>

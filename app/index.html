@@ -2,11 +2,16 @@
 <html ng-app="webApp">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="images/favicon.ico">
+        <title>STUDIO BLACK JEANS : Administrador de contenidos</title>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
         <script src="bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
+        <script src="bower_components/datatables.net-fixedcolumns/js/dataTables.fixedColumns.min.js"></script>
+        <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.min.js"></script>
+
 
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="bower_components/angular-aria/angular-aria.js"></script>
@@ -16,20 +21,28 @@
         <script src="bower_components/ng-accordion/ng-accordion/dist/ng-accordion.min.js"></script>
         <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+
+
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
         <link rel="stylesheet" href="bower_components/ng-accordion/ng-accordion/dist/ng-accordion.min.css">
+
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/custom.css">
         <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet">
-
+      <!--  <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/fixedcolumns/3.2.6/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+-->
 
         <script src="scripts/app.js"></script>
         <script src="scripts/app.routes.js"></script>
         <script src="scripts/services/requester.js"></script>
         <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/notifications.js"></script>
 
         <script src="scripts/components/common/leftNavBar.js"></script>
         <script src="scripts/components/common/login.js"></script>
@@ -41,16 +54,18 @@
         <script src="scripts/components/common/element-content.js"></script>
         <script src="scripts/components/common/appDatatable.js"></script>
 
-
         <script src="scripts/components/common/gallery.js"></script>
-
 
         <script src="scripts/components/main.js"></script>
         <script src="scripts/components/sizesGuide.js"></script>
         <script src="scripts/components/galleries.js"></script>
+        <script src="scripts/components/gallery_detail.js"></script>
+
         <script src="scripts/components/images.js"></script>
         <script src="scripts/components/products.js"></script>
         <script src="scripts/components/styles.js"></script>
+        <script src="scripts/components/style_detail.js"></script>
+
         <script src="scripts/components/pagesContent.js"></script>
 
 
