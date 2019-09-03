@@ -44,7 +44,7 @@
         };
 
         vm.selectItem = function(item){
-          showSimpleToast(item);
+          //showSimpleToast(item);
         }
         function showSimpleToast(title) {
           $mdToast.show(

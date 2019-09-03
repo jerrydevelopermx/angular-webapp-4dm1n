@@ -6,7 +6,7 @@
     <md-content flex="33" flex-xs="66" md-theme="dark" class="md-padding" >
 
       <div class="login-form" style="border-bottom: 1px solid;">
-        <h1>Iniciar sesión</h1>
+        <h3>Iniciar sesión</h3>
       </div>
       <form>
         <div layout="column" class="login-form">
@@ -17,7 +17,7 @@
           <div layout="row" layout-align="center center">
             <md-button flex="33" class="md-raised md-primary" ng-click="$ctrl.login()">Enviar</md-button>
           </div>
-          <div>
+          <div style="color: red; text-align:center; font-size:18px">
             {{$ctrl.error}}
           </div>
         </div>

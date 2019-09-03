@@ -61,7 +61,7 @@
         });
 
 
-        vm.selectItem = function(item){
+        /*vm.selectItem = function(item){
           showSimpleToast(item);
         }
         function showSimpleToast(title) {
@@ -71,7 +71,7 @@
               .hideDelay(2000)
               .position('bottom right')
           );
-        }
+        }*/
 
 
       }

@@ -28,7 +28,7 @@
               $state.go('home');
             }
           }, function(error){
-            vm.error = error;
+            vm.error = 'Usuario o contraseña incorrectos. Inténtelo de nuevo.';
           });
 
         }

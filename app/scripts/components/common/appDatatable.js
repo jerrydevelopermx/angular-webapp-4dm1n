@@ -90,7 +90,7 @@
             var types = {
               image: { template: 'views/common/imageViewer.html', callUrl: 'catalog/images/', controller: ImgDialogCtrl },
             //  gallery: { template: 'views/gallery_detail.html', callUrl: 'catalog/galleries/', controller: GalleryDialogCtrl },
-              style: { template: 'views/style_detail.html', callUrl: 'catalog/styles/', controller: StyleDialogCtrl },
+            //  style: { template: 'views/style_detail.html', callUrl: 'catalog/styles/', controller: StyleDialogCtrl },
               product: { template: 'views/product_detail.html', callUrl: 'catalog/products/', controller: DialogController },
 
               sizes: { template: 'views/sizes_detail.html', callUrl: 'catalog/sizes/', controller: DialogController },
@@ -159,7 +159,7 @@
 
           }
 
-          function StyleDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
+          /*function StyleDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
             let $ctrl = this;
             $ctrl.style = {};
             function init(){
@@ -192,7 +192,8 @@
             }
           };
 
-          /*function GalleryDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
+
+          function GalleryDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
             let $ctrl = this;
             $ctrl.gallery = {};
             function init(){

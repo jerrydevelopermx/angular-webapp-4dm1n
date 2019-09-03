@@ -22,7 +22,8 @@
               { key: 'color', title: 'Color'},
               { key: 'price', title: 'Precio'},
               { key: 'sizes', title: 'Tallas'},
-              { key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
+              //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
+              { key: null, title: '', custom: function(data) { return '<i class="material-icons md-30">create</i>' } }
             ]
           };
 
@@ -34,7 +35,8 @@
               { key: 'color', title: 'Color'},
               { key: 'price', title: 'Precio'},
               { key: 'sizes', title: 'Tallas'},
-              { key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
+              //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
+              { key: null, title: '', custom: function(data) { return '<i class="material-icons md-30">create</i>' } }
 
             ]
           };
