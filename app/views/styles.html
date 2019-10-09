@@ -2,7 +2,7 @@
   <div flex layout="row" layout-align="center center"><h3>ESTILOS</h3></div>
   <div flex layout="column">
     <div flex layout="row">
-      <md-button flex="11" class="md-raised md-primary">Agregar</md-button>
+      <md-button flex="11" class="md-raised md-primary" ng-click="$ctrl.addStyles()">Agregar</md-button>
     </div>
     <app-datatable flex config="$ctrl.dtConfig" name="styles"></app-datatable>
   </div>

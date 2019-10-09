@@ -102,10 +102,19 @@
             $ctrl.selectedImage = '';
             function init(){
               $ctrl.images_repo = APP.images_repo;
-              Requester.get('catalog/images').then(function(data) {
-                console.log(data)
-                $ctrl.data = data;
-              })
+              $ctrl.dtConfig = {
+                api: 'catalog/images',
+                columns : [
+                  { key: 'src', title: 'Archivo'},
+                  { key: 'description', title: 'Descripción'},
+                  { key: null, title: 'Vista previa', custom: function(data) { return '<img src="' + $ctrl.images_repo + data.src +'" width="200"/>' } },
+                  { key: null, title: 'Seleccionar', custom: function(data) { return '<input type="radio" value="'+ data.image_id +'" ng-model="$ctrl.selectedImage" ng-change="$ctrl.config.expression(\'' + data.image_id+'\')"/>' } },
+                ],
+                expression: function(value){
+                  $ctrl.selectedImage = value;
+                },
+                pageLength: 5
+              };
             }
             init();
 

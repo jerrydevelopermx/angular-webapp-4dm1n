@@ -9,7 +9,7 @@
           name: '@'
         },
         templateUrl: 'views/common/appDatatable.html',
-        controller: function($compile, $scope, $rootScope, DTOptionsBuilder, DTColumnBuilder, $mdDialog, Requester){
+        controller: function($compile, $scope, $rootScope, DTOptionsBuilder, DTColumnBuilder, $mdDialog, Requester, Notifications){
           var vm = this;
           var language = {
             "sProcessing":     "Procesando...",
@@ -41,7 +41,6 @@
 
           $rootScope.$on('changeWomanStyle', updateWomanDT);
           $rootScope.$on('changeManStyle', updateManDT);
-          $rootScope.$on("dtContentUpdated", updateStylesDT);
 
           function updateWomanDT(event, args){
             if(vm.dtInstances[args.name] && typeof(vm.dtInstances[args.name].changeData) === 'function'){
@@ -54,19 +53,13 @@
               vm.dtInstances[args.name].changeData(Requester.get('catalog/products_style/' + args.style));
             }
           }
-          /*
-          UPDATE styles datatable
-          */
-          function updateStylesDT(){ console.log('rerender')
-          console.log(vm.dtInstances['styles'])
-            vm.dtInstances['styles']._renderer.rerender();
-          }
+
 
 
           vm.$onInit = function(){
             vm.dtInstances[vm.name] = {};
             vm.dtOptions = DTOptionsBuilder.fromFnPromise(Requester.get(vm.config.api))
-              .withPaginationType('full_numbers')
+              .withPaginationType('full_numbers').withDisplayLength((vm.config.pageLength)?vm.config.pageLength:10).withOption('lengthMenu', [[5, 10, 15, 20, 25, 50,-1],[5,10,15,20,25, 50,"All"]])
               .withLanguage(language)
               /*.withOption('scrollX', true)
               .withOption('scrollCollapse', true)
@@ -86,13 +79,11 @@
             }
           };
 
+
+
           vm.showModal = function(type, element_id) {
             var types = {
               image: { template: 'views/common/imageViewer.html', callUrl: 'catalog/images/', controller: ImgDialogCtrl },
-            //  gallery: { template: 'views/gallery_detail.html', callUrl: 'catalog/galleries/', controller: GalleryDialogCtrl },
-            //  style: { template: 'views/style_detail.html', callUrl: 'catalog/styles/', controller: StyleDialogCtrl },
-              product: { template: 'views/product_detail.html', callUrl: 'catalog/products/', controller: DialogController },
-
               sizes: { template: 'views/sizes_detail.html', callUrl: 'catalog/sizes/', controller: DialogController },
 
 
@@ -129,47 +120,16 @@
           }
 
           function DialogController($scope, $mdDialog, url, APP) {
-
-            function init(){
-              $scope.images_url = APP.images_repo;
-              Requester.get(url).then(function(data) { console.log(data)
-                $scope.data = data;
-                //$scope.src = APP.images_repo + ((result.data[0].src) ? result.data[0].src : '');
-                //console.log($scope.src)
-              })
-            }
-            init();
-
-            $scope.hide = function() {
-              $mdDialog.hide();
-            };
-
-            $scope.cancel = function() {
-              $mdDialog.cancel();
-            };
-
-            $scope.answer = function(answer) {
-              $mdDialog.hide(answer);
-            };
-
-            $scope.updateStyle = function () {
-
-
-            }
-
-          }
-
-          /*function StyleDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
             let $ctrl = this;
-            $ctrl.style = {};
+            $ctrl.title = 'Detalle Talla';
+            $ctrl.isEdit = true;
             function init(){
               $ctrl.images_url = APP.images_repo;
               Requester.get(url).then(function(data) { console.log(data)
-                $ctrl.id = data[0].style_id;
-                $ctrl.style.gender = data[0].gender;
-                $ctrl.style.name = data[0].name;
-                $ctrl.style.src = data[0].src;
-                $ctrl.style.description = data[0].description;
+                $ctrl.size = data[0];
+              });
+              Requester.get('catalog/products').then(function(products) {
+                $ctrl.products = products;
               })
             }
             init();
@@ -179,53 +139,24 @@
             };
 
             $ctrl.update = function () {
-              Requester.put('content/styles/' + $ctrl.id, $ctrl.style).then(function(data) {
+              var sizeObj = {
+                size: $ctrl.size.size,
+                description: $ctrl.size.description,
+                waist: $ctrl.size.waist,
+                hip: $ctrl.size.hip
+              };
+              Requester.put('catalog/sizes/' + $ctrl.size.size_id, sizeObj).then(function(data) { console.log(data)
                 if(data.status == 200){
                   Notifications.message('success', 'Contenido actualizado correctamente');
                   $mdDialog.hide();
-                  //$scope.$emit("dtContentUpdated", {});
                 }
               },
               function(error){
                 Notifications.message('error', error);
               });
             }
-          };
 
-
-          function GalleryDialogCtrl($scope, $mdDialog, url, APP, Notifications) {
-            let $ctrl = this;
-            $ctrl.gallery = {};
-            function init(){
-              $ctrl.images_url = APP.images_repo;
-              Requester.get(url).then(function(data) {
-                $ctrl.id = data[0].gallery_id;
-                $ctrl.gallery.name = data[0].name;
-                $ctrl.gallery.description = data[0].description;
-                $ctrl.type = data[0].gallery_type;
-                $ctrl.page = data[0].parent_id;
-                $ctrl.data = data;
-              })
-            }
-            init();
-
-            $ctrl.selectImage = function () { console.log("aj")
-              $mdDialog.show({
-                locals:{ url: 'catalog/images/' },
-                controller: ImgDialogCtrl,
-                controllerAs: '$ctrl',
-                templateUrl: 'views/common/imageViewer.html',
-              //  parent: angular.element(document.body),
-                //clickOutsideToClose:true
-              });
-            }
-
-            $ctrl.hide = function() {
-              $mdDialog.hide();
-            };
-
-
-          };*/
+          }
         }
       })
 })();

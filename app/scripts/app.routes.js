@@ -56,12 +56,28 @@ function routes ($stateProvider, $urlRouterProvider) {
                     publicPage: true
                 })
 
+                .state('styleAdd', {
+                    url: '/estilos/agregar',
+                    component: 'styleDetail',
+                    publicPage: true
+                })
+
                 .state('products', {
                     url: '/productos',
                     component: 'products',
                     publicPage: true
                 })
+                .state('productDetail', {
+                    url: '/productos/detalle/{id}',
+                    component: 'productDetail',
+                    publicPage: true
+                })
 
+                .state('productAdd', {
+                    url: '/productos/agregar/{gender}/{style}',
+                    component: 'productDetail',
+                    publicPage: true
+                })
                 .state('pagesContent', {
                     url: '/contenido-paginas/:page',
                     component: 'pagesContent',

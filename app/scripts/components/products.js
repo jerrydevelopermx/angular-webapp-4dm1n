@@ -7,7 +7,7 @@
           data: '=',
         },
         templateUrl: 'views/products.html',
-        controller: function(APP, Requester, $scope, Auth){
+        controller: function(APP, Requester, $scope, Auth, $state){
           var vm = this;
           vm.womanStyles = [];
           vm.manStyles = [];
@@ -22,8 +22,7 @@
               { key: 'color', title: 'Color'},
               { key: 'price', title: 'Precio'},
               { key: 'sizes', title: 'Tallas'},
-              //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
-              { key: null, title: '', custom: function(data) { return '<i class="material-icons md-30">create</i>' } }
+              { key: null, title: '', custom: function(data) { return '<a href="#!/productos/detalle/'+ data.product_id+' "><i class="material-icons md-30">create</i></a>' } },
             ]
           };
 
@@ -35,8 +34,7 @@
               { key: 'color', title: 'Color'},
               { key: 'price', title: 'Precio'},
               { key: 'sizes', title: 'Tallas'},
-              //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'product\', \'' + data.product_id + '\')"><i class="material-icons md-30">create</i></a>' } }
-              { key: null, title: '', custom: function(data) { return '<i class="material-icons md-30">create</i>' } }
+              { key: null, title: '', custom: function(data) { return '<a href="#!/productos/detalle/'+ data.product_id+' "><i class="material-icons md-30">create</i></a>' } },
 
             ]
           };
@@ -50,14 +48,17 @@
 
           }
 
-          vm.changeWomanStyle = function(){ console.log('changeWomanStyle')
+          vm.changeWomanStyle = function(){
             $scope.$emit("changeWomanStyle", { style: vm.selectedWomanStyle, name:'woman' });
           }
 
-          vm.changeManStyle = function(){console.log('changeManStyle')
+          vm.changeManStyle = function(){
             $scope.$emit("changeManStyle", { style: vm.selectedManStyle, name:'man' });
           }
 
+          vm.addProduct = function(gender){
+            $state.go('productAdd',{ gender: gender, style: (gender=='woman') ? vm.selectedWomanStyle : vm.selectedManStyle });
+          }
           function getStyles(){
             Requester.get('catalog/styles/').then(function(data) {
               formatStyles(data);

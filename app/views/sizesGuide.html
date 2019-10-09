@@ -2,7 +2,7 @@
     <div flex layout="row" layout-align="center center"><h3>GUIA DE TALLAS</h3></div>
     <div flex layout="column">
       <div flex layout="row">
-        <md-button flex="11" class="md-raised md-primary">Agregar</md-button>
+        <md-button flex="11" class="md-raised md-primary" ng-click="$ctrl.showModal()">Agregar</md-button>
       </div>
       <app-datatable config="$ctrl.dtConfig"></app-datatable>
     </div>

@@ -22,8 +22,8 @@ angular
   ])
 
   .constant('APP',{
-    'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',//'http://localhost/web-content-api/index.php/',
-    'images_repo' : 'http://studioblackjeans.com/'//'http://localhost:1339/'
+    'api_url' : 'http://localhost/web-content-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
+    'images_repo' : 'http://localhost:1339/'
   })
 
   .config(function (localStorageServiceProvider, $mdThemingProvider) {

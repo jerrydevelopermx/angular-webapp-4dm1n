@@ -1,5 +1,5 @@
 <md-content class="md-padding" layout="column" layout-sm="column">
-      <h3>Detalle estilo</h3>
+      <h3>{{$ctrl.title}}</h3>
 
       <div class="" layout="column" >
 
@@ -8,9 +8,16 @@
           <div flex layout="row">
             <input flex="90" class="form-control" type="text" ng-model="$ctrl.style.name"/>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Género: </div>
-          <div flex="40" flex-xs="100" layout="row">
-            <input flex="90" class="form-control" type="text" value="{{$ctrl.style.gender}}" readonly="readonly"/>
+          <div flex="40" flex-xs="100" layout="column" layout-align="start start">
+            <md-input-container style="margin: 0">
+              <label>Género:</label>
+              <md-select ng-model="$ctrl.style.gender" ng-disabled="$ctrl.isEdit">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id" ng-selected="index == 0">
+                  {{gender.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
           </div>
         </div>
 
@@ -20,16 +27,32 @@
             <textarea rows="4" flex="95" ng-model="$ctrl.style.description"></textarea>
           </div>
         </div>
-
+        <div layout="row" layout-xs="column" class="form-row" ng-if="$ctrl.isEdit">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Publicado: </div>
+          <div flex layout="row">
+            <md-checkbox ng-model="$ctrl.style.published" aria-label="Checkbox" ng-checked="$ctrl.style.published" ng-true-value="1" ng-false-value="0">
+            </md-checkbox>
+          </div>
+        </div>
         <div layout="row" layout-align="center center">
-          <md-button class="md-raised save-button" ng-click="$ctrl.update()">
+          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()">
+            Guardar
+          </md-button>
+          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()">
             Guardar
           </md-button>
         </div>
 
-        <div layout="row" class="form-row">
+        <div layout="row" class="form-row" ng-if="$ctrl.isEdit">
           <div flex="10" flex-xs="100" layout="column" layout-align="center start">Imagen: </div>
-          <img ng-src="{{$ctrl.images_url + $ctrl.style.src}}" width="200"/>
+          <div layout="column">
+            <img ng-src="{{$ctrl.images_url + $ctrl.style.src}}" width="200"/>
+            <div layout="row" layout-align="center center">
+              <md-button flex="25" class="md-raised edit-button" ng-click="$ctrl.imageSelector($ctrl.style_id)">
+                Cambiar
+              </md-button>
+            </div>
+          </div
 
         </div>
       </div>

@@ -9,23 +9,7 @@
 
     <md-dialog-content>
       <div class="md-dialog-content" layout="column" >
-        <table class="dataTable mdl-data-table">
-          <thead>
-            <th>Archivo</th>
-            <th>Descripción</th>
-            <th>Vista previa</th>
-            <th>Seleccionar</th>
-          </thead>
-          <tbody>
-            <tr ng-repeat="img in $ctrl.data">
-              <td>{{img.src}}</td>
-              <td>{{img.description}}</td>
-              <td><img ng-src="{{$ctrl.images_repo + img.src}}" width="200"/></td>
-              <td><input type="radio" ng-value="img.image_id" ng-model="$ctrl.selectedImage"/></td>
-            </tr>
-          </tbody>
-        </table>
-
+        <app-datatable config="$ctrl.dtConfig"></app-datatable>
       </div>
     </md-dialog-content>
 

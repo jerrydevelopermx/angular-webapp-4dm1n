@@ -1,23 +1,85 @@
-<md-dialog aria-label="Mango (Fruit)">
-  <form ng-cloak>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h3>Detalle Producto</h3>
-        <span flex></span>
+<md-content class="md-padding" layout="column" layout-sm="column">
+      <h3>{{$ctrl.title}}</h3>
+      <div class="" layout="column" >
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Código: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.product.code"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Color: </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.product.color"/>
+          </div>
+        </div>
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Sexo: </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <md-input-container flex="30">
+              <md-select ng-model="$ctrl.product.gender" ng-disabled="$ctrl.isEdit" ng-change="$ctrl.changeGender();">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id">
+                  {{gender.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Estilo: </div>
+          <div flex layout="row">
+            <md-input-container flex="30">
+              <md-select ng-model="$ctrl.product.style_id" ng-disabled="$ctrl.isEdit">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="(index,style) in $ctrl.styles" ng-value="style.style_id">
+                  {{style.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Precio: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.product.price"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start" ><span ng-if="$ctrl.isEdit">Tallas:</span> </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.product.sizes" readonly="readonly" ng-if="$ctrl.isEdit"/>
+          </div>
+        </div>
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
+          <div flex layout="row" >
+            <textarea rows="4" flex="95" ng-model="$ctrl.product.description"></textarea>
+          </div>
+        </div>
+        <div layout="row" layout-xs="column" class="form-row" ng-if="$ctrl.isEdit">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Publicado: </div>
+          <div flex layout="row">
+            <md-checkbox ng-model="$ctrl.product.published" aria-label="Checkbox" ng-checked="$ctrl.product.published" ng-true-value="1" ng-false-value="0">
+            </md-checkbox>
+          </div>
+        </div>
+        <div layout="row" layout-align="center center">
+          <md-button class="md-raised save-button" ng-click="$ctrl.update()" ng-if="$ctrl.isEdit">
+            Guardar
+          </md-button>
+          <md-button class="md-raised save-button" ng-click="$ctrl.save()" ng-if="!$ctrl.isEdit">
+            Guardar
+          </md-button>
+        </div>
+        <hr/>
+        <div layout="column" class="form-row" ng-if="$ctrl.images.length > 0">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start"><h4>Imágenes:</h4> </div>
+          <div layout="row">
+            <div flex layout="column" layout-align="center center" ng-repeat="img in $ctrl.images">
+              <img ng-src="{{$ctrl.images_url + img.src}}" width="200"/>
+              <div layout="row" layout-align="center center">
+                <md-button flex="25" class="md-raised edit-button" ng-click="$ctrl.imageSelector($ctrl.product.product_id, img.id )">
+                  Cambiar
+                </md-button>
+              </div>
+            </div>
+          </div
+
+        </div>
       </div>
-    </md-toolbar>
-
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        {{data}}
-      </div>
-    </md-dialog-content>
-
-    <md-dialog-actions layout="row">
-
-      <md-button class="md-raised md-primary" ng-click="hide()">
-       Cerrar
-      </md-button>
-    </md-dialog-actions>
-  </form>
-</md-dialog>
+</md-content>

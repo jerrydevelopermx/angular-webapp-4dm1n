@@ -7,7 +7,7 @@
           data: '=',
         },
         templateUrl: 'views/styles.html',
-        controller: function($scope, Auth){
+        controller: function($scope, Auth, $state){
           var vm = this;
 
           vm.$onInit = function(){
@@ -27,6 +27,10 @@
                 //{ key: null, title: '', custom: function(data) { return '<a href ng-click="$ctrl.showModal(\'style\', \'' + data.style_id + '\')"><i class="material-icons md-30">create</i></a>' } },
               ]
             };
+          }
+
+          vm.addStyles = function(){
+            $state.go('styleAdd')
           }
 
         }

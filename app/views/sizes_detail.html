@@ -1,21 +1,65 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="Detalle Talla" flex="50">
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h3>Detalle Guía de tallas</h3>
+        <h3>{{$ctrl.title}}</h3>
         <span flex></span>
       </div>
     </md-toolbar>
 
     <md-dialog-content>
-      <div class="md-dialog-content">
-        {{data}} 
+      <div class="md-dialog-content" layout="column">
+
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Producto: </div>
+          <div flex layout="row">
+            <md-input-container flex="90" style="margin: 0">
+              <md-select ng-model="$ctrl.size.product_id" ng-disabled="$ctrl.isEdit" >
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="product in $ctrl.products" ng-value="product.product_id">
+                  {{product.code}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Talla: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.size"/>
+          </div>
+        </div>
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Cintura: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.waist"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Cadera: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.hip"/>
+          </div>
+        </div>
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Descripción:</div>
+          <div flex layout="row">
+            <input flex="40" class="form-control" type="text" ng-model="$ctrl.size.description"/>
+          </div>
+        </div>
+
+        <div layout="row" layout-align="center center">
+          <md-button class="md-raised save-button" ng-if="$ctrl.isEdit" ng-click="$ctrl.update()">
+            Guardar
+          </md-button>
+          <md-button class="md-raised save-button" ng-if="!$ctrl.isEdit" ng-click="$ctrl.save()">
+            Guardar
+          </md-button>
+        </div>
       </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
 
-      <md-button class="md-raised md-primary" ng-click="hide()">
+      <md-button class="md-raised md-primary" ng-click="$ctrl.hide()">
        Cerrar
       </md-button>
     </md-dialog-actions>
