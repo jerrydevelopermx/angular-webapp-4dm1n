@@ -22,7 +22,7 @@ angular
   ])
 
   .constant('APP',{
-    'api_url' : 'http://localhost/web-content-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
+    'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',
     'images_repo' : 'http://localhost:1339/'
   })
 
