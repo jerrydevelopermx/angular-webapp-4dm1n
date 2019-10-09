@@ -23,7 +23,7 @@ angular
 
   .constant('APP',{
     'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',
-    'images_repo' : 'http://localhost:1339/'
+    'images_repo' : 'http://studioblackjeans.com/'
   })
 
   .config(function (localStorageServiceProvider, $mdThemingProvider) {
