@@ -19,7 +19,7 @@
         <div flex layout="row" layout-align="start center">
           <label flex="10" flex-xs="25">Contenido</label>
         </div>
-        <textarea flex ng-model="$ctrl.content" rows="10" cols="10"></textarea>
+        <textarea flex ng-model="$ctrl.content" ui-tinymce="$ctrl.tinymceOptions" rows="10" cols="10"></textarea>
         <div layout="row" layout-align="center center">
           <md-button class="md-raised save-button" ng-click="$ctrl.saveContent()">
             Guardar

@@ -61,11 +61,6 @@
             vm.dtOptions = DTOptionsBuilder.fromFnPromise(Requester.get(vm.config.api))
               .withPaginationType('full_numbers').withDisplayLength((vm.config.pageLength)?vm.config.pageLength:10).withOption('lengthMenu', [[5, 10, 15, 20, 25, 50,-1],[5,10,15,20,25, 50,"All"]])
               .withLanguage(language)
-              /*.withOption('scrollX', true)
-              .withOption('scrollCollapse', true)
-              .withFixedColumns({
-                  leftColumns: 2
-              })*/
               .withOption('createdRow', function(row) {
                 $compile(angular.element(row).contents())($scope);
               });

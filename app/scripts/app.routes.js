@@ -82,5 +82,28 @@ function routes ($stateProvider, $urlRouterProvider) {
                     url: '/contenido-paginas/:page',
                     component: 'pagesContent',
                     publicPage: true
+                })
+
+                .state('imageUploader', {
+                    url: '/imagenes/agregar',
+                    component: 'imageUploader',
+                    publicPage: true
+                })
+                .state('users', {
+                    url: '/usuarios',
+                    component: 'users',
+                    publicPage: true
+                })
+
+                .state('userAdd', {
+                    url: '/usuarios/agregar',
+                    component: 'userDetail',
+                    publicPage: true
+                })
+
+                .state('userDetail', {
+                    url: '/usuarios/detalle/{id}',
+                    component: 'userDetail',
+                    publicPage: true
                 });
 }

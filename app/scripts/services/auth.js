@@ -5,17 +5,19 @@ angular.module('webApp')
   return {
     login: login,
     logout : logout,
-    validate : validateSession
-
+    validate : validateSession,
+    validateSuperUserAccess : validateSuperUserAccess,
+    userValidate : validateUser
   }
 
 
   function login(credentials){
     var defer = $q.defer();
     Requester.post('auth/login/', credentials).then(function(data) {
-      console.log(data);
       localStorageService.set('token', data.token);
-      defer.resolve(true);
+      localStorageService.set('user', data.user[0]);
+
+      defer.resolve(data);
     },
     function(error){
       defer.reject(error)
@@ -34,6 +36,21 @@ angular.module('webApp')
       $state.go('login');
     } else {
       return true;
+    }
+  }
+
+  function validateUser(){
+    if(localStorageService.get('token') == null){
+      $state.go('login');
+    } else {
+      return localStorageService.get('user');
+    }
+  }
+
+  function validateSuperUserAccess(){
+    var user = localStorageService.get('user');
+    if(user.user_type != 'SuperUser'){
+      $state.go('home');
     }
   }
 

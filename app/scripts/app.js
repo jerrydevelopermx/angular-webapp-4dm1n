@@ -18,12 +18,14 @@ angular
       'datatables',
       'datatables.fixedcolumns',
       'LocalStorageModule',
-      'ngSanitize'
+      'ngSanitize',
+      'ngFileUpload',
+      'ui.tinymce'
   ])
 
   .constant('APP',{
-    'api_url' : 'http://studioblackjeans.com/studioblackjeans-api/index.php/',
-    'images_repo' : 'http://studioblackjeans.com/'
+    'api_url' : 'http://dfcc3518.ngrok.io/web-content-api/index.php/',//'http://studioblackjeans.com/studioblackjeans-api/index.php/',,
+    'images_repo' : 'http://localhost:1339/'
   })
 
   .config(function (localStorageServiceProvider, $mdThemingProvider) {

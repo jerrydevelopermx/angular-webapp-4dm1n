@@ -1,0 +1,62 @@
+<md-content class="md-padding" layout="column" layout-sm="column"> <!-- layout-fill-->
+      <h3>{{$ctrl.title}}</h3>
+      <div class="" layout="column" >
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Nombre: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.name"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Apellidos: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.last_name"/>
+          </div>
+        </div>
+
+        <div layout="row" layout-xs="column" class="form-row">
+
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">E-mail: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.email"/>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Teléfono: </div>
+          <div flex layout="row">
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.phone_number"/>
+          </div>
+
+        </div>
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Género: </div>
+          <div flex="60" flex-xs="100" layout="column" layout-align="start start">
+            <md-input-container style="margin: 0">
+              <md-select ng-model="$ctrl.user.gender">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id" ng-selected="index == 0">
+                  {{gender.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Tipo de usuario:</div>
+          <div flex="60" flex-xs="100" layout="column" layout-align="start start">
+            <md-input-container flex style="margin: 0">
+              <md-select ng-model="$ctrl.user.user_type">
+                <md-option><em>Ninguno</em></md-option>
+                <md-option ng-repeat="type in $ctrl.types" ng-value="type.id" ng-selected="index == 0">
+                  {{type.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+
+        <div layout="row" layout-align="center center">
+          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()">
+            Guardar
+          </md-button>
+          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()">
+            Guardar
+          </md-button>
+        </div>
+      </div>
+</md-content>

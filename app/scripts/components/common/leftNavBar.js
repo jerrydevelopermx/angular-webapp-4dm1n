@@ -11,7 +11,7 @@
       })
 
 
-      function componentController($rootScope, $scope, $mdToast){
+      function componentController($rootScope, $scope, localStorageService){
         var vm = this;
         vm.loggedUser = false;
         vm.$onInit = function(){
@@ -53,26 +53,28 @@
               icon: 'accessibility',
               sref: 'sizesGuide'
             },
+            {
+              name: 'Usuarios',
+              icon: 'account_circle',
+              sref: 'users'
+            }
           ];
+
+          /*var user = localStorageService.get('user');
+
+          if(user && user.user_type === 'SuperUser'){
+            vm.menuItems.push({
+              name: 'Usuarios',
+              icon: 'account_circle',
+              sref: 'users'
+            })
+          } */
+
         };
 
         $rootScope.$on('userLogged', function(event, params){
           vm.loggedUser = params.status;
+
         });
-
-
-        /*vm.selectItem = function(item){
-          showSimpleToast(item);
-        }
-        function showSimpleToast(title) {
-          $mdToast.show(
-            $mdToast.simple()
-              .content(title)
-              .hideDelay(2000)
-              .position('bottom right')
-          );
-        }*/
-
-
       }
 })();

@@ -57,7 +57,7 @@
           }
 
           vm.addProduct = function(gender){
-            $state.go('productAdd',{ gender: gender, style: (gender=='woman') ? vm.selectedWomanStyle : vm.selectedManStyle });
+            $state.go('productAdd',{ gender: gender, style: (gender == 'mujer') ? vm.selectedWomanStyle : vm.selectedManStyle });
           }
           function getStyles(){
             Requester.get('catalog/styles/').then(function(data) {

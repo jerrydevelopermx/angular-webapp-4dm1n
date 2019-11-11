@@ -22,9 +22,9 @@
             username : vm.username,
             password : vm.password
           }
-          Auth.login(credentials).then(function(success){
-            if(success){
-              $scope.$emit("userLogged", { status: true });
+          Auth.login(credentials).then(function(response){
+            if(response){
+              $scope.$emit("userLogged", { status: true, username: response.user[0].name });
               $state.go('home');
             }
           }, function(error){

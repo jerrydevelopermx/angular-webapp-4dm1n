@@ -1,0 +1,42 @@
+<md-content class="md-padding" layout="column" layout-sm="column">
+  <h3>Agregar imágenes</h3>
+
+  <div layout="row" layout-xs="column" class="form-row">
+    <div flex="10" flex-xs="100" layout="column" layout-align="center start">Tipo: </div>
+    <div flex="40" flex-xs="100" layout="row">
+      <md-input-container flex="50">
+        <md-select ng-model="$ctrl.location" ng-change="$ctrl.changeImgType();">
+          <md-option><em>Ninguno</em></md-option>
+          <md-option ng-repeat="type in $ctrl.imgTypes" ng-value="type.id">
+            {{type.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+    <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
+    <div flex layout="row">
+      <textarea rows="4" flex="95" ng-model="$ctrl.description"></textarea>
+    </div>
+  </div>
+  <div layout="row" layout-xs="column" class="form-row">
+    <div class="md-raised md-primary md-button md-dark-theme md-ink-ripple" ng-show="$ctrl.location != '' && $ctrl.description != ''"
+          ngf-select ng-model="$ctrl.files" multiple="multiple">
+          Seleccionar imagen(es)
+    </div>
+  </div>
+  <div layout="row" layout-xs="column" layout-align="center center" class="form-row">
+    <md-button ng-click="$ctrl.uploadFiles($ctrl.files)" class="md-raised save-button">
+      Guardar
+    </md-button>
+  </div>
+  <div layout="column" layout-xs="column" class="form-row">
+    <span flex layout="row" class="progress" ng-show="$ctrl.progressPercentage > 0">
+      <div flex style="width:{{$ctrl.progressPercentage}}%"> {{$ctrl.progressPercentage}} %</div>
+    </span><br/>
+    <div flex layout="row">
+      <div flex layout="row" layout-align="center start" ng-repeat="f in $ctrl.files">
+        <img width="200"  ngf-src="!f.$error && f" >
+      </div>
+    </div>
+  </div>
+</md-content>

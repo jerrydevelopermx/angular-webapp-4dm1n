@@ -90,6 +90,10 @@
           let $ctrl = this;
           $ctrl.title = '';
           $ctrl.content = '';
+          $ctrl.tinymceOptions = {
+            plugins: 'link image code',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+          };
           function init(){
             Requester.get('content/chunk_elements/' + element_id).then(function(data) { console.log(data)
               $ctrl.title = data[0].title;

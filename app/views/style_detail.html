@@ -2,30 +2,48 @@
       <h3>{{$ctrl.title}}</h3>
 
       <div class="" layout="column" >
+        <form name="$ctrl.styleForm" novalidate>
 
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Nombre: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.style.name"/>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Nombre:
+            <span class="required_mark">*</span>
           </div>
-          <div flex="40" flex-xs="100" layout="column" layout-align="start start">
-            <md-input-container style="margin: 0">
-              <label>Género:</label>
-              <md-select ng-model="$ctrl.style.gender" ng-disabled="$ctrl.isEdit">
-                <md-option><em>Ninguno</em></md-option>
-                <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id" ng-selected="index == 0">
+          <md-input-container flex>
+            <input flex="90" name="name" required class="form-control" type="text" ng-model="$ctrl.style.name"/>
+            <div flex ng-messages="$ctrl.styleForm.name.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Género:
+            <span class="required_mark">*</span>
+          </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <md-input-container flex="30">
+              <md-select name="gender" ng-model="$ctrl.style.gender" required ng-disabled="$ctrl.isEdit" ng-change="$ctrl.changeGender();">
+                <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id">
                   {{gender.name}}
                 </md-option>
               </md-select>
+              <div flex ng-messages="$ctrl.styleForm.gender.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
             </md-input-container>
           </div>
         </div>
 
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
-          <div flex layout="row" >
-            <textarea rows="4" flex="95" ng-model="$ctrl.style.description"></textarea>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Descripción:
+            <span class="required_mark">*</span>
           </div>
+          <md-input-container flex layout="column" >
+            <textarea rows="2" name="description" flex="95" required ng-model="$ctrl.style.description"></textarea>
+            <div flex ng-messages="$ctrl.styleForm.description.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
         </div>
         <div layout="row" layout-xs="column" class="form-row" ng-if="$ctrl.isEdit">
           <div flex="10" flex-xs="100" layout="column" layout-align="center start">Publicado: </div>
@@ -35,10 +53,10 @@
           </div>
         </div>
         <div layout="row" layout-align="center center">
-          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()">
+          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()" ng-disabled="!$ctrl.styleForm.$valid">
             Guardar
           </md-button>
-          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()">
+          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()" ng-disabled="!$ctrl.styleForm.$valid">
             Guardar
           </md-button>
         </div>
@@ -55,5 +73,6 @@
           </div
 
         </div>
+        </form>
       </div>
 </md-content>

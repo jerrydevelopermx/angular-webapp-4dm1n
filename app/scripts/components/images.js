@@ -7,7 +7,7 @@
           data: '='
         },
         templateUrl: 'views/images.html',
-        controller: function($mdDialog, $scope, Auth){
+        controller: function($mdDialog, $scope, Auth, $state){
           var vm = this;
 
           vm.$onInit = function(){
@@ -26,11 +26,9 @@
 
               ]
             };
-          }
+          };
 
-
-
-          vm.showImage = function(ev) { console.log("no mms")
+          vm.showImage = function(ev) {
               $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'views/common/imageViewer.html',
@@ -57,6 +55,10 @@
               $scope.answer = function(answer) {
                 $mdDialog.hide(answer);
               };
+            }
+
+            vm.addImage = function() {
+              $state.go('imageUploader');
             }
 
         }

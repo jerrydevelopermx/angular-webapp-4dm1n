@@ -2,14 +2,13 @@
     'use strict';
     angular.module('webApp')
 
-    .component('styleDetail', {
+    .component('userDetail', {
         bindings: {
           data: '<',
         },
-        templateUrl: 'views/style_detail.html',
+        templateUrl: 'views/user_detail.html',
         controller: function($compile, $scope, $rootScope, $mdDialog, Auth, Requester, APP, $stateParams, Notifications, $state){
           let vm = this;
-          vm.style = {};
           vm.isEdit = false;
           vm.genders = [];
           var user;
@@ -23,11 +22,15 @@
                           {name:'Mujer', id: 'mujer'},
                           {name:'Hombre', id: 'hombre'}
                         ];
+            vm.types = [
+                          {name:'Super usuario', id: 'SuperUser'},
+                          {name:'Usuario', id: 'User'}
+                        ];
 
-            vm.title = 'Agregar estilo';
+            vm.title = 'Agregar usuario';
             if($stateParams.id){
               vm.isEdit = true;
-              vm.style_id = $stateParams.id;
+              vm.user_id = $stateParams.id;
               getData();
             }
             vm.images_url = APP.images_repo;
@@ -35,24 +38,17 @@
           }
 
           function getData() {
-            vm.title = 'Detalle estilo';
-            Requester.get('catalog/styles/' + vm.style_id).then(function(data) {
-              vm.id = data[0].style_id;
-              vm.style.gender = data[0].gender;
-              vm.style.name = data[0].name;
-              vm.style.src = data[0].src;
-              vm.style.published = (data[0].published == '1');
-              vm.style.description = data[0].description;
+            vm.title = 'Detalle usuario';
+            Requester.get('catalog/users/' + vm.user_id).then(function(data) { console.log(data)
+              vm.user = data[0];
             })
           }
 
-
           vm.update = function () {
-            vm.style.published = (vm.style.published == false) ? 0 : vm.style.published;
-            vm.style.current_user = user.user_id;
-            Requester.put('catalog/styles/' + vm.style_id, vm.style).then(function(data) {
+            vm.user.current_user = user.user_id;
+            Requester.put('catalog/users/' + vm.user_id, vm.user).then(function(data) {
               if(data.status == 200){
-                Notifications.message('success', 'Contenido actualizado correctamente');
+                Notifications.message('success', 'Usuario actualizado correctamente');
               }
             },
             function(error){
@@ -61,11 +57,10 @@
           };
 
           vm.add = function () {
-            vm.style.current_user = user.user_id;
-            Requester.post('catalog/styles/', vm.style).then(function(data) {
+            vm.user.current_user = user.user_id;
+            Requester.post('catalog/users/', vm.user).then(function(data) {
               if(data.status == 200){
-                Notifications.message('success', 'Estilo agregado correctamente');
-                $state.go('styleDetail',{id: data.data});
+                Notifications.message('success', 'Usuario agregado correctamente');
               }
             },
             function(error){
@@ -115,7 +110,7 @@
                 cover_image_id : $ctrl.selectedImage
               };
 
-              Requester.put('catalog/styles/' + element_id, element).then(function(data) {
+              Requester.put('content/styles/' + element_id, element).then(function(data) {
                 if(data.status == 200){
                   Notifications.message('success', 'Contenido actualizado correctamente');
                   $mdDialog.hide();

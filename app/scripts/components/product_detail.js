@@ -13,9 +13,12 @@
           vm.styles = [];
           vm.genders = [{id:'mujer', name:'Mujer'}, {id:'hombre',name:'Hombre'}];
           var gender = '';
+          var user;
 
           vm.$onInit = function() {
-            if(Auth.validate()) {
+
+            user = Auth.userValidate();
+            if(user.user_id) {
               $scope.$emit("userLogged", { status: true });
             }
             if($stateParams.id){
@@ -29,12 +32,12 @@
             }
             vm.images_url = APP.images_repo;
 
-
           }
 
           function getProduct() {
-            Requester.get('catalog/products/' + vm.product_id).then(function(data) { console.log(data)
+            Requester.get('catalog/products/' + vm.product_id).then(function(data) {
               vm.product = data[0];
+              vm.product.price = Number(vm.product.price);
               vm.product.published = (data[0].published == '1');
               gender = data[0].gender;
               getStylesByGender();
@@ -71,7 +74,8 @@
               description: vm.product.description,
               color: vm.product.color,
               price: vm.product.price,
-              published: vm.product.published
+              published: vm.product.published,
+              current_user : user.user_id
             }
             Requester.put('catalog/products/' + vm.product_id, updateObj).then(function(data) {
               if(data.status == 200){
@@ -84,6 +88,7 @@
           };
 
           vm.save = function () {
+            vm.product.current_user = user.user_id;
             Requester.post('catalog/products/', vm.product).then(function(data) {
               if(data.status == 200){
                 Notifications.message('success', 'Producto agregado correctamente');
