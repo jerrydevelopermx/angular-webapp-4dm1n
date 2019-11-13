@@ -1,28 +1,42 @@
 <md-content class="md-padding" layout="column" layout-sm="column">
-  <h3>Detalle galería</h3>
+  <h3>Editar Banner</h3>
       <div class="" layout="column">
-
+        <form name="$ctrl.galleryForm" novalidate>
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Nombre: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.gallery.name"/>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Nombre:
+            <span class="required_mark">*</span>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
-          <div flex layout="row" >
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.gallery.description"/>
+          <md-input-container flex >
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.gallery.name" name="name" required/>
+            <div flex ng-messages="$ctrl.galleryForm.name.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Descripción:
+            <span class="required_mark">*</span>
           </div>
+          <md-input-container flex >
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.gallery.description" name="description" required/>
+            <div flex ng-messages="$ctrl.galleryForm.description.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
         </div>
 
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Página: </div>
-          <div flex layout="row"> <input class="form-control" flex="90"lex type="text" ng-value="$ctrl.page" readonly="readonly"/></div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Tipo: </div>
-          <div flex layout="row">
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start" class="title_label">Página: </div>
+          <md-input-container flex layout="row">
+            <input class="form-control" flex="90"lex type="text" ng-value="$ctrl.page" readonly="readonly"/>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start" class="title_label">Tipo: </div>
+          <md-input-container flex>
             <input flex="90" class="form-control" type="text" ng-value="$ctrl.type" readonly="readonly"/>
-          </div>
+          </md-input-container>
         </div>
         <div layout="row" layout-xs="column" class="form-row" layout-align="center center">
-          <md-button class="md-raised save-button" ng-click="$ctrl.update()">
+          <md-button class="md-raised save-button" ng-click="$ctrl.update()" ng-disabled="!$ctrl.galleryForm.$valid">
             Guardar
           </md-button>
         </div>
@@ -56,5 +70,6 @@
           </table>
 
         </div>
+        </form>
       </div>
 </md-content>

@@ -1,62 +1,97 @@
 <md-content class="md-padding" layout="column" layout-sm="column"> <!-- layout-fill-->
       <h3>{{$ctrl.title}}</h3>
       <div class="" layout="column" >
+        <form name="$ctrl.userForm" novalidate>
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Nombre: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.name"/>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Nombre:
+            <span class="required_mark">*</span>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Apellidos: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.last_name"/>
+          <md-input-container flex >
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.name" name="name" required/>
+            <div flex ng-messages="$ctrl.userForm.name.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Apellidos:
+            <span class="required_mark">*</span>
           </div>
+          <md-input-container flex>
+            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.last_name" name="last_name" required/>
+            <div flex ng-messages="$ctrl.userForm.last_name.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
         </div>
 
         <div layout="row" layout-xs="column" class="form-row">
 
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">E-mail: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.email"/>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            E-mail:
+            <span class="required_mark">*</span>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Teléfono: </div>
-          <div flex layout="row">
+          <md-input-container flex>
+            <input flex="90" class="form-control" type="email" ng-model="$ctrl.user.email" required name="email"/>
+            <div flex ng-messages="$ctrl.userForm.email.$error">
+              <div ng-message="required">Campo requerido</div>
+              <div ng-message="email">E-mail no válido</div>
+            </div>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="column" layout-align="center start" class="title_label">
+            Teléfono:
+          </div>
+          <md-input-container flex>
             <input flex="90" class="form-control" type="text" ng-model="$ctrl.user.phone_number"/>
-          </div>
+          </md-input-container>
 
         </div>
 
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Género: </div>
-          <div flex="60" flex-xs="100" layout="column" layout-align="start start">
-            <md-input-container style="margin: 0">
-              <md-select ng-model="$ctrl.user.gender">
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Género:
+            <span class="required_mark">*</span>
+          </div>
+          <div flex="60" flex-xs="100" layout="row" layout-align="start start">
+            <md-input-container flex="70" style="margin: 0">
+              <md-select ng-model="$ctrl.user.gender" required name="gender">
                 <md-option><em>Ninguno</em></md-option>
                 <md-option ng-repeat="gender in $ctrl.genders" ng-value="gender.id" ng-selected="index == 0">
                   {{gender.name}}
                 </md-option>
               </md-select>
+              <div flex ng-messages="$ctrl.userForm.gender.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
             </md-input-container>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Tipo de usuario:</div>
-          <div flex="60" flex-xs="100" layout="column" layout-align="start start">
-            <md-input-container flex style="margin: 0">
-              <md-select ng-model="$ctrl.user.user_type">
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Tipo de usuario:
+            <span class="required_mark">*</span>
+          </div>
+          <div flex="60" flex-xs="100" layout="row" layout-align="start start">
+            <md-input-container flex ="70" style="margin: 0">
+              <md-select ng-model="$ctrl.user.user_type" name="type" required>
                 <md-option><em>Ninguno</em></md-option>
                 <md-option ng-repeat="type in $ctrl.types" ng-value="type.id" ng-selected="index == 0">
                   {{type.name}}
                 </md-option>
               </md-select>
+              <div flex ng-messages="$ctrl.userForm.email.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
             </md-input-container>
           </div>
         </div>
 
         <div layout="row" layout-align="center center">
-          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()">
+          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()" ng-disabled="!$ctrl.userForm.$valid">
             Guardar
           </md-button>
-          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()">
+          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()" ng-disabled="!$ctrl.userForm.$valid">
             Guardar
           </md-button>
         </div>
+        </form>
       </div>
 </md-content>

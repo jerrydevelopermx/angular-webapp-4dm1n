@@ -38,7 +38,7 @@
           }
 
           function getData() {
-            vm.title = 'Detalle usuario';
+            vm.title = 'Editar usuario';
             Requester.get('catalog/users/' + vm.user_id).then(function(data) { console.log(data)
               vm.user = data[0];
             })

@@ -120,8 +120,9 @@
             $ctrl.isEdit = true;
             function init(){
               $ctrl.images_url = APP.images_repo;
-              Requester.get(url).then(function(data) { console.log(data)
+              Requester.get(url).then(function(data) {
                 $ctrl.size = data[0];
+                $ctrl.size.size = Number($ctrl.size.size);
               });
               Requester.get('catalog/products').then(function(products) {
                 $ctrl.products = products;

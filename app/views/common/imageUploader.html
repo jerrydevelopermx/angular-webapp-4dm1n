@@ -1,34 +1,64 @@
 <md-content class="md-padding" layout="column" layout-sm="column">
   <h3>Agregar imágenes</h3>
+  <form name="$ctrl.imageForm" novalidate>
+  <div layout="row" layout-xs="column" class="form-row" >
+    <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+      Tipo:
+      <span class="required_mark">*</span>
+    </div>
 
-  <div layout="row" layout-xs="column" class="form-row">
-    <div flex="10" flex-xs="100" layout="column" layout-align="center start">Tipo: </div>
-    <div flex="40" flex-xs="100" layout="row">
-      <md-input-container flex="50">
-        <md-select ng-model="$ctrl.location" ng-change="$ctrl.changeImgType();">
+    <div flex="25" flex-xs="100" layout="row" >
+      <md-input-container flex >
+        <md-select ng-model="$ctrl.location" name="types" required>
           <md-option><em>Ninguno</em></md-option>
-          <md-option ng-repeat="type in $ctrl.imgTypes" ng-value="type.id">
+          <md-option ng-repeat="type in $ctrl.imgTypes" ng-value="type">
             {{type.name}}
           </md-option>
         </md-select>
+        <div flex ng-messages="$ctrl.imageForm.types.$error">
+          <div ng-message="required">Campo requerido</div>
+        </div>
       </md-input-container>
     </div>
-    <div flex="10" flex-xs="100" layout="column" layout-align="center start">Descripción: </div>
-    <div flex layout="row">
-      <textarea rows="4" flex="95" ng-model="$ctrl.description"></textarea>
+
+    <div flex="60" flex-xs="100" layout="column" ng-show="$ctrl.location.use" class="image-info-box">
+      <div style="text-align: center" class="title_label">Información por tipo de imagen</div>
+      <div flex>
+        <span class="title_label">Usadas en: </span> {{$ctrl.location.use}} <span class="title_label">Formatos: </span> JPG, PNG
+      </div>
+      <div flex>
+        <span class="title_label">Dimensiones sugeridas <em>(Ancho x alto)</em>:</span> {{$ctrl.location.dimensions}}
+      </div>
     </div>
+
+
   </div>
   <div layout="row" layout-xs="column" class="form-row">
-    <div class="md-raised md-primary md-button md-dark-theme md-ink-ripple" ng-show="$ctrl.location != '' && $ctrl.description != ''"
+    <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label" >
+      Descripción:
+      <span class="required_mark">*</span>
+    </div>
+    <md-input-container flex >
+        <textarea rows="2" flex="95" ng-model="$ctrl.description" name="description" required></textarea>
+        <div flex ng-messages="$ctrl.imageForm.description.$error">
+          <div ng-message="required">Campo requerido</div>
+        </div>
+    </md-input-container>
+  </div>
+
+  <div layout="row" layout-xs="column" class="form-row">
+    <div class="md-raised md-primary md-button md-dark-theme md-ink-ripple"
           ngf-select ng-model="$ctrl.files" multiple="multiple">
           Seleccionar imagen(es)
     </div>
   </div>
+
   <div layout="row" layout-xs="column" layout-align="center center" class="form-row">
-    <md-button ng-click="$ctrl.uploadFiles($ctrl.files)" class="md-raised save-button">
+    <md-button ng-click="$ctrl.uploadFiles($ctrl.files)" class="md-raised save-button" ng-disabled="!$ctrl.imageForm.$valid">
       Guardar
     </md-button>
   </div>
+
   <div layout="column" layout-xs="column" class="form-row">
     <span flex layout="row" class="progress" ng-show="$ctrl.progressPercentage > 0">
       <div flex style="width:{{$ctrl.progressPercentage}}%"> {{$ctrl.progressPercentage}} %</div>
@@ -39,4 +69,6 @@
       </div>
     </div>
   </div>
+  </form>
+
 </md-content>

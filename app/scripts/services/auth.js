@@ -31,7 +31,6 @@ angular.module('webApp')
   }
 
   function validateSession(){
-    console.log(localStorageService.get('token'))
     if(localStorageService.get('token') == null){
       $state.go('login');
     } else {

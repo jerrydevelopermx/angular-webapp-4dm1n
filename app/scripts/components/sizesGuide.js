@@ -17,7 +17,7 @@
             vm.dtConfig = {
               api: 'catalog/sizes_product',
               columns : [
-                { key: 'product_id', title: 'Producto'},
+                { key: 'code', title: 'Producto'},
                 { key: 'size', title: 'Talla'},
                 { key: 'description', title: 'Descripción'},
                 { key: 'waist', title: 'Cintura'},
@@ -56,7 +56,7 @@
             };
 
             $ctrl.save = function () {
-              Requester.post('catalog/sizes', $ctrl.size).then(function(data) { console.log(data)
+              Requester.post('catalog/sizes', $ctrl.size).then(function(data) {
                 if(data.status == 200){
                   Notifications.message('success', 'Contenido agregado correctamente');
                   $mdDialog.hide();

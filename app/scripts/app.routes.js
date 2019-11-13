@@ -33,7 +33,7 @@ function routes ($stateProvider, $urlRouterProvider) {
                     publicPage: true
                 })
                 .state('galleries', {
-                    url: '/galerias',
+                    url: '/banners',
                     component: 'galleries',
                     publicPage: true
                 })

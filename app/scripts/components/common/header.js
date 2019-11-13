@@ -23,8 +23,7 @@
             vm.loggedUser = params.status;
 
             var user = localStorageService.get('user');
-            console.log(user)
-            vm.welcome = (user && user.gender == 'Mujer') ? 'Bienvenida' : 'Bienvenido';
+            vm.welcome = (user && user.gender == 'mujer') ? 'Bienvenida' : 'Bienvenido';
             vm.username = (user) ? user.name : '';
 
           });

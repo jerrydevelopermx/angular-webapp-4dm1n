@@ -35,7 +35,7 @@
           }
 
           function getData() {
-            vm.title = 'Detalle estilo';
+            vm.title = 'Editar estilo';
             Requester.get('catalog/styles/' + vm.style_id).then(function(data) {
               vm.id = data[0].style_id;
               vm.style.gender = data[0].gender;

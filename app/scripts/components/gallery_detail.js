@@ -10,9 +10,10 @@
         controller: function($compile, $scope, $rootScope, $mdDialog, Auth, Requester, APP, $stateParams,Notifications){
           let vm = this;
           vm.gallery = {};
-
+          var user;
           vm.$onInit = function() {
-            if(Auth.validate()) {
+            user = Auth.userValidate();
+            if(user.user_id) {
               $scope.$emit("userLogged", { status: true });
             }
             vm.gallery_id = $stateParams.id;
@@ -21,7 +22,7 @@
           }
 
           function getData(){
-            Requester.get('catalog/galleries/' + vm.gallery_id).then(function(data) { console.log(data)
+            Requester.get('catalog/galleries/' + vm.gallery_id).then(function(data) {
               vm.id = data[0].gallery_id;
               vm.gallery.name = data[0].name;
               vm.gallery.description = data[0].description;
@@ -32,6 +33,7 @@
           }
 
           vm.update = function () {
+            vm.gallery.current_user =  user.user_id;
             Requester.put('catalog/galleries/' + vm.gallery_id, vm.gallery).then(function(data) {
               if(data.status == 200){
                 Notifications.message('success', 'Contenido actualizado correctamente');
@@ -45,7 +47,8 @@
           vm.updateText = function(index) {
             var text = {
               image_id: vm.data[index].image_id,
-              description: vm.data[index].text
+              description: (vm.data[index].text.length == 0 || /^\s*$/.test(vm.data[index].text)) ? 'N/A' : vm.data[index].text,
+              current_user: user.user_id
             }
             Requester.put('catalog/galleries_images/' + vm.data[index].gallery_id, text).then(function(data) { console.log(data)
               if(data.status == 200){
@@ -61,11 +64,13 @@
             var index2 = (direction == 'up') ? index-1 : index+1;
             var img1 = {
               image_id: vm.data[index].image_id,
-              order_index: vm.data[index2].order_index
+              order_index: vm.data[index2].order_index,
+              current_user: user.user_id
             }
             var img2 = {
               image_id: vm.data[index2].image_id,
-              order_index: vm.data[index].order_index
+              order_index: vm.data[index].order_index,
+              current_user: user.user_id
             }
             Requester.put('catalog/galleries_images/' + vm.data[index].gallery_id, img1).then(function(data) {
               if(data.status == 200){
@@ -127,7 +132,8 @@
             $ctrl.changeImage = function() {
               var element = {
                 image_id: image_id,
-                new_image_id : $ctrl.selectedImage
+                new_image_id : $ctrl.selectedImage,
+                current_user: user.user_id
               };
               Requester.put('catalog/galleries_images/' + gallery_id, element).then(function(data) {
                 if(data.status == 200){

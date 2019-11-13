@@ -24,7 +24,7 @@
           }
           Auth.login(credentials).then(function(response){
             if(response){
-              $scope.$emit("userLogged", { status: true, username: response.user[0].name });
+              $scope.$emit("userLogged", { status: true, username: response.user[0].name, user_type: response.user[0].user_type });
               $state.go('home');
             }
           }, function(error){

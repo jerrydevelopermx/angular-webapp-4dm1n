@@ -1,60 +1,91 @@
 <md-dialog aria-label="Detalle Talla" flex="50">
-  <form ng-cloak>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h3>{{$ctrl.title}}</h3>
-        <span flex></span>
-      </div>
-    </md-toolbar>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h3>{{$ctrl.title}}</h3>
+      <span flex></span>
+    </div>
+  </md-toolbar>
 
-    <md-dialog-content>
-      <div class="md-dialog-content" layout="column">
-
-
+  <md-dialog-content>
+    <div class="md-dialog-content" layout="column">
+      <form name="$ctrl.sizeForm" novalidate>
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Producto: </div>
-          <div flex layout="row">
-            <md-input-container flex="90" style="margin: 0">
-              <md-select ng-model="$ctrl.size.product_id" ng-disabled="$ctrl.isEdit" >
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Producto:
+            <span class="required_mark">*</span>
+          </div>
+          <div flex="40" flex-xs="100" layout="row">
+            <md-input-container flex>
+              <md-select ng-model="$ctrl.size.product_id" name="product_id" required ng-disabled="$ctrl.isEdit" >
                 <md-option><em>Ninguno</em></md-option>
                 <md-option ng-repeat="product in $ctrl.products" ng-value="product.product_id">
                   {{product.code}}
                 </md-option>
               </md-select>
+              <div flex ng-messages="$ctrl.sizeForm.product_id.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
             </md-input-container>
           </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Talla: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.size"/>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Talla:
+            <span class="required_mark">*</span>
           </div>
-        </div>
-        <div layout="row" layout-xs="column" class="form-row">
-          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Cintura: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.waist"/>
-          </div>
-          <div flex="10" flex-xs="100" layout="column" layout-align="center start">Cadera: </div>
-          <div flex layout="row">
-            <input flex="90" class="form-control" type="text" ng-model="$ctrl.size.hip"/>
-          </div>
+          <md-input-container flex md-no-float>
+            <input flex="90" name="size" class="form-control" type="number" nofloat required ng-model="$ctrl.size.size" placeholder="Numérico"/>
+            <div flex ng-messages="$ctrl.sizeForm.size.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
         </div>
 
         <div layout="row" layout-xs="column" class="form-row">
-          <div flex="15" flex-xs="100" layout="column" layout-align="center start">Descripción:</div>
-          <div flex layout="row">
-            <input flex="40" class="form-control" type="text" ng-model="$ctrl.size.description"/>
+          <div flex="10" flex-xs="100" layout="row" required layout-align="start center" class="title_label">
+            Cintura:
+            <span class="required_mark">*</span>
           </div>
+          <md-input-container flex>
+            <input flex="90" class="form-control" type="text" name="waist" required ng-model="$ctrl.size.waist"/>
+            <div flex ng-messages="$ctrl.sizeForm.waist.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Cadera:
+            <span class="required_mark">*</span>
+          </div>
+          <md-input-container flex>
+            <input flex="90" class="form-control" type="text" name="hip" required ng-model="$ctrl.size.hip"/>
+            <div flex ng-messages="$ctrl.sizeForm.hip.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="row" layout-xs="column" class="form-row">
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+            Nombre:
+            <span class="required_mark">*</span>
+          </div>
+          <md-input-container flex md-no-float>
+            <input flex="40" class="form-control" type="text" required name="description" ng-model="$ctrl.size.description" placeholder="Talla 28"/>
+            <div flex ng-messages="$ctrl.sizeForm.description.$error">
+              <div ng-message="required">Campo requerido</div>
+            </div>
+          </md-input-container>
         </div>
 
         <div layout="row" layout-align="center center">
-          <md-button class="md-raised save-button" ng-if="$ctrl.isEdit" ng-click="$ctrl.update()">
+          <md-button class="md-raised save-button" ng-if="$ctrl.isEdit" ng-click="$ctrl.update()" ng-disabled="!$ctrl.sizeForm.$valid">
             Guardar
           </md-button>
-          <md-button class="md-raised save-button" ng-if="!$ctrl.isEdit" ng-click="$ctrl.save()">
+          <md-button class="md-raised save-button" ng-if="!$ctrl.isEdit" ng-click="$ctrl.save()" ng-disabled="!$ctrl.sizeForm.$valid">
             Guardar
           </md-button>
         </div>
+        </form>
       </div>
+
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
@@ -63,5 +94,4 @@
        Cerrar
       </md-button>
     </md-dialog-actions>
-  </form>
 </md-dialog>

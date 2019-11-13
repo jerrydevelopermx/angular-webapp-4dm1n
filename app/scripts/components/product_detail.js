@@ -138,7 +138,8 @@
 
             $ctrl.changeImage = function() {
               var element = {
-                image_id : $ctrl.selectedImage
+                image_id : $ctrl.selectedImage,
+                current_user : user.user_id
               };
               Requester.put('catalog/products_image/' + product_image_id, element).then(function(data) {
                 if(data.status == 200){

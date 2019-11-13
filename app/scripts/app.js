@@ -4,7 +4,7 @@
  * @ngdoc overview
  * @name webApp
  * @description
- * # contactCenterWeb
+ * # STUDIOBLACKJEANS
  *
  * Main module of the application.
  */
