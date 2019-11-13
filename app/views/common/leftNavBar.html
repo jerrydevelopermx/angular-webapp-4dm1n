@@ -38,14 +38,13 @@
   <md-toolbar md-theme="custom" class="md-hue-1 md-whiteframe-z2">
     <img src="images/logo-negro.png" height="60" />
   </md-toolbar>
-  <!-- content-url="'views/common/pages.html'"-->
   <accordion
       timing="200"
       close-others="true"
       toggle-icon="">
       <toggle
         ng-repeat="c in $ctrl.content"
-        content="value"
+        content="c.value"
         heading="c.heading"
         handle="myaccordion">
       </toggle>
