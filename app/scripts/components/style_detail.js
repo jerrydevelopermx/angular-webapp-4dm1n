@@ -19,6 +19,8 @@
             if(user.user_id) {
               $scope.$emit("userLogged", { status: true });
             }
+            Auth.validateSuperUserAccess();
+            
             vm.genders = [
                           {name:'Mujer', id: 'mujer'},
                           {name:'Hombre', id: 'hombre'}

@@ -11,22 +11,24 @@
       })
 
 
-      function componentController($rootScope, $scope, localStorageService){
+      function componentController($rootScope, $scope, localStorageService, $mdSidenav, $compile){
         var vm = this;
         vm.loggedUser = false;
         vm.menuItems = [];
-        vm.$onInit = function(){
-          var pagesList = `<ul>
-                              <li><a id="home-link" class="pages-links" href="#!/contenido-paginas/home"><i class="material-icons md-30">home</i><span>Home</span></a></li>
-                              <li><a id="nosotros-link" class="pages-links" href="#!/contenido-paginas/nosotros"><i class="material-icons md-30">supervisor_account</i><span>Nosotros</span></a></li>
-                              <li><a id="inspirate-link" class="pages-links" href="#!/contenido-paginas/inspirate"><i class="material-icons md-30">wb_incandescent</i><span>Inspírate</span></a></li>
-                              <li><a id="mayoreo-link" class="pages-links" href="#!/contenido-paginas/mayoreo"><i class="material-icons md-30">attach_money</i><span>Venta mayoreo</span></a></li>
-                          </ul>`;
-          vm.content = [
-                      	{ 'value': pagesList,
+        var pagesList = `<ul>
+                            <li><a id="home-link" class="pages-links" href="#!/contenido-paginas/home"><i class="material-icons md-30">home</i><span>Home</span></a></li>
+                            <li><a id="nosotros-link" class="pages-links" href="#!/contenido-paginas/nosotros"><i class="material-icons md-30">supervisor_account</i><span>Nosotros</span></a></li>
+                            <li><a id="inspirate-link" class="pages-links" href="#!/contenido-paginas/inspirate"><i class="material-icons md-30">wb_incandescent</i><span>Inspírate</span></a></li>
+                            <li><a id="mayoreo-link" class="pages-links" href="#!/contenido-paginas/mayoreo"><i class="material-icons md-30">attach_money</i><span>Venta mayoreo</span></a></li>
+                        </ul>`;
+        vm.content = [
+                        { 'value': pagesList,
                           'heading': '<i class="material-icons md-30">library_books</i> Páginas '
                         }
                       ];
+
+        vm.$onInit = function(){
+
 
 
           vm.navBarItems = {
@@ -72,6 +74,17 @@
                   }]
           };
         };
+
+        vm.selectItem = function(item){
+          $mdSidenav('left').close()
+            .then(function() {
+              //return;
+            });
+        }
+
+        $('#home-link').bind('click', function () {
+            console.log("I would also be triggered!");
+        });
 
         $rootScope.$on('userLogged', function(event, params){
           if(params.user_type) {

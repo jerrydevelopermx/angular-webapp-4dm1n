@@ -21,6 +21,8 @@
             if(user.user_id) {
               $scope.$emit("userLogged", { status: true });
             }
+            Auth.validateSuperUserAccess();
+            
             if($stateParams.id){
               vm.isEdit = true;
               vm.product_id = $stateParams.id;

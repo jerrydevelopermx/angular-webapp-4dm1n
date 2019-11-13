@@ -16,6 +16,8 @@
             if(user.user_id) {
               $scope.$emit("userLogged", { status: true });
             }
+            Auth.validateSuperUserAccess();
+            
             vm.gallery_id = $stateParams.id;
             vm.images_url = APP.images_repo;
             getData();

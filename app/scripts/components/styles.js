@@ -11,10 +11,11 @@
           var vm = this;
 
           vm.$onInit = function(){
-
-            if(Auth.validate()) {
-              $scope.$emit("userLogged", { status: true });
+            var user = Auth.userValidate();
+            if(user.user_id) {
+              $scope.$emit("userLogged", { status: true, user_type: user.user_type });
             }
+            Auth.validateSuperUserAccess();
 
             vm.dtConfig = {
               api: 'catalog/styles',

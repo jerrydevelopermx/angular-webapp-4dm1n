@@ -37,7 +37,8 @@ angular
       $mdThemingProvider.theme("success-toast");
       $mdThemingProvider.theme("error-toast");
 
-    });
+    })
+
 
 
   /*
