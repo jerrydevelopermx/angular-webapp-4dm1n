@@ -105,5 +105,10 @@ function routes ($stateProvider, $urlRouterProvider) {
                     url: '/usuarios/detalle/{id}',
                     component: 'userDetail',
                     publicPage: true
+                })
+                .state('profile', {
+                    url: '/perfil',
+                    component: 'userDetail',
+                    publicPage: true
                 });
 }

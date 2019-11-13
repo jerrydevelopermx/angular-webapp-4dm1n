@@ -19,14 +19,14 @@
 
             user = Auth.userValidate();
             if(user.user_id) {
-              $scope.$emit("userLogged", { status: true });
+              $scope.$emit("userLogged", { status: true, user_type: user.user_type });
             }
             Auth.validateSuperUserAccess();
-            
+
             if($stateParams.id){
               vm.isEdit = true;
               vm.product_id = $stateParams.id;
-              vm.title = 'Detalle producto';
+              vm.title = 'Editar producto';
               getProduct();
             } else {
               getStylesByGender();

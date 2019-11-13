@@ -14,10 +14,10 @@
           vm.$onInit = function() {
             user = Auth.userValidate();
             if(user.user_id) {
-              $scope.$emit("userLogged", { status: true });
+              $scope.$emit("userLogged", { status: true, user_type: user.user_type });
             }
             Auth.validateSuperUserAccess();
-            
+
             vm.gallery_id = $stateParams.id;
             vm.images_url = APP.images_repo;
             getData();

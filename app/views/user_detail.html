@@ -65,11 +65,11 @@
               </div>
             </md-input-container>
           </div>
-          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label">
+          <div flex="10" flex-xs="100" layout="row" layout-align="start center" class="title_label" ng-show="!$ctrl.isProfile">
             Tipo de usuario:
             <span class="required_mark">*</span>
           </div>
-          <div flex="60" flex-xs="100" layout="row" layout-align="start start">
+          <div flex="60" flex-xs="100" layout="row" layout-align="start start" ng-show="!$ctrl.isProfile">
             <md-input-container flex ="70" style="margin: 0">
               <md-select ng-model="$ctrl.user.user_type" name="type" required>
                 <md-option><em>Ninguno</em></md-option>
@@ -82,13 +82,16 @@
               </div>
             </md-input-container>
           </div>
+          <div flex="50" flex-xs="100" layout="row" layout-align="start center" class="title_label" ng-show="$ctrl.isProfile">
+            <md-button flex="50" class="md-raised edit-button" ng-click="$ctrl.changePassword()">Cambiar contraseña</md-button>
+          </div>
         </div>
 
-        <div layout="row" layout-align="center center">
-          <md-button ng-if="$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.update()" ng-disabled="!$ctrl.userForm.$valid">
+        <div layout="row" layout-align="center center"> 
+          <md-button ng-if="$ctrl.isEdit || $ctrl.isProfile" class="md-raised save-button" ng-click="$ctrl.update()" ng-disabled="!$ctrl.userForm.$valid">
             Guardar
           </md-button>
-          <md-button ng-if="!$ctrl.isEdit" class="md-raised save-button" ng-click="$ctrl.add()" ng-disabled="!$ctrl.userForm.$valid">
+          <md-button ng-if="!$ctrl.isEdit && !$ctrl.isProfile" class="md-raised save-button" ng-click="$ctrl.add()" ng-disabled="!$ctrl.userForm.$valid">
             Guardar
           </md-button>
         </div>

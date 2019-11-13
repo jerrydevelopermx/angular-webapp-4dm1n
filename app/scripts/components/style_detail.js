@@ -17,10 +17,10 @@
           vm.$onInit = function() {
             user = Auth.userValidate();
             if(user.user_id) {
-              $scope.$emit("userLogged", { status: true });
+              $scope.$emit("userLogged", { status: true, user_type: user.user_type });
             }
             Auth.validateSuperUserAccess();
-            
+
             vm.genders = [
                           {name:'Mujer', id: 'mujer'},
                           {name:'Hombre', id: 'hombre'}

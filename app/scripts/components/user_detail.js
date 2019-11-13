@@ -16,10 +16,10 @@
           vm.$onInit = function() {
             user = Auth.userValidate();
             if(user.user_id) {
-              $scope.$emit("userLogged", { status: true });
+              $scope.$emit("userLogged", { status: true, user_type: user.user_type });
             }
             Auth.validateSuperUserAccess();
-            
+
             vm.genders = [
                           {name:'Mujer', id: 'mujer'},
                           {name:'Hombre', id: 'hombre'}
@@ -33,15 +33,23 @@
             if($stateParams.id){
               vm.isEdit = true;
               vm.user_id = $stateParams.id;
+              vm.title = 'Editar usuario';
               getData();
+            } else {
+              if($state.current.name === 'profile'){
+                vm.isProfile = true;
+                vm.user_id = user.user_id;
+                vm.title = 'Mi perfil';
+                getData()
+              }
             }
             vm.images_url = APP.images_repo;
 
           }
 
+
           function getData() {
-            vm.title = 'Editar usuario';
-            Requester.get('catalog/users/' + vm.user_id).then(function(data) { console.log(data)
+            Requester.get('catalog/users/' + vm.user_id).then(function(data) {
               vm.user = data[0];
             })
           }
@@ -69,6 +77,48 @@
               Notifications.message('error', error);
             });
           };
+
+          vm.changePassword = function() {
+            $mdDialog.show({
+              locals:{ user_id: user.user_id },
+              controllerAs: '$ctrl',
+              controller: DialogController,
+              templateUrl: 'views/common/passwordChange.html',
+              parent: angular.element(document.body),
+              clickOutsideToClose:true
+            })
+          }
+
+          function DialogController($scope, $mdDialog, APP, user_id) {
+            let $ctrl = this;
+            $ctrl.passwordsMatch = true;
+
+            $ctrl.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $ctrl.validatePasswords = function(){
+              if($ctrl.password.new && $ctrl.password.newRepeat){
+                $ctrl.passwordsMatch = ($ctrl.password.new === $ctrl.password.newRepeat);
+              }
+            };
+
+            $ctrl.update = function () {
+              var user = {
+                password: $ctrl.password.new
+              }
+              Requester.put('catalog/user_credentials/' + user_id, user).then(function(data) {
+                if(data.status == 200){
+                  Notifications.message('success', 'Contraseña actualizada correctamente');
+                  $mdDialog.hide();
+                }
+              },
+              function(error){
+                Notifications.message('error', error);
+              });
+            }
+
+          }
 
 
           vm.imageSelector = function(element_id){

@@ -7,12 +7,15 @@
           data: '=',
         },
         templateUrl: 'views/pagesContent.html',
-        controller: function($rootScope, $stateParams, Requester, $scope, Auth, $timeout){
+        controller: function($rootScope, $stateParams, Requester, $scope, Auth, $timeout, $mdSidenav){
 
           var vm = this;
           vm.page = '';
           vm.content = {};
           vm.$onInit = function(){
+            $mdSidenav('left').close()
+              .then(function() {});
+
             var user = Auth.userValidate();
             if(user.user_id) {
               $scope.$emit("userLogged", { status: true, user_type: user.user_type });

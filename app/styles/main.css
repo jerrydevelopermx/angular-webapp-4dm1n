@@ -29,6 +29,11 @@ body {
     width: 270px;
   }
 }
+
+.common-error {
+  color: rgb(221,44,0);
+  font-size: 12px;
+}
 .md-dialog-content ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-style: italic !important;
 }

@@ -11,7 +11,7 @@
       })
 
 
-      function componentController($rootScope, $scope, localStorageService, $mdSidenav, $compile){
+      function componentController($rootScope, $scope, localStorageService, $mdSidenav){
         var vm = this;
         vm.loggedUser = false;
         vm.menuItems = [];
@@ -29,8 +29,6 @@
 
         vm.$onInit = function(){
 
-
-
           vm.navBarItems = {
             User: [{
                     name: 'Banners',
@@ -41,6 +39,11 @@
                     name: 'Imágenes',
                     icon: 'image',
                     sref: 'images'
+                  },
+                  {
+                    name: 'Mi Perfil',
+                    icon: 'account_circle',
+                    sref: 'profile'
                   }],
             SuperUser: [{
                     name: 'Banners',
@@ -69,8 +72,13 @@
                   },
                   {
                     name: 'Usuarios',
-                    icon: 'account_circle',
+                    icon: 'people',
                     sref: 'users'
+                  },
+                  {
+                    name: 'Mi Perfil',
+                    icon: 'account_circle',
+                    sref: 'profile'
                   }]
           };
         };
